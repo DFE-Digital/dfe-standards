@@ -1,3 +1,5 @@
+{% if cmsEnabled === 'true' %}
+
 {{ header({
 "showNav": "true",
 "showSearch": "false",
@@ -39,5 +41,43 @@
 })
 }}
 
+{% else %}
+{{ header({
+"showNav": "true",
+"showSearch": "false",
+"showHeaderActionLinks": "false",
+"showUserName": "false",
+"userName": "",
+"userNameURL": "",
+"selectedNav": selectedNav,
+"logoPath": "assets/images",
+"searchInputName": "searchterm",
+"logoAltText": "Standards manual",
+"homeHref":"https://standards.education.gov.uk",
+"service": {
+"name": "Standards manual",
+"serviceUrl": "/"
+},
+"headerActionLinks": [
+{ "url": "/support", "label": "Support" },
+{ "url": "/guidance", "label": "Guidance" }
+],
+"primaryLinks": [
+{
+    "url": "/",
+    "label": "Home"
+},
+{
+"url" : "/guidance",
+"label" : "Guidance"
+},
+{
+"url" : "/support",
+"label" : "Support"
+}
+]
+})
+}}
+{% endif %}
 
 
