@@ -21,12 +21,12 @@
   }
 ] %}
 
-{% set guidanceteams = [
+{# {% set guidanceteams = [
   {
     title: "Applying standards",
     url: "/guidance/apply"
   }
-] %}
+] %} #}
 
 <nav class="dfe-vertical-nav">
 
@@ -50,7 +50,7 @@
       {% endfor %}
     </ul>
 
-    <h2 class="dfe-vertical-nav--section-header">For teams</h2>
+    {# <h2 class="dfe-vertical-nav--section-header">For teams</h2>
 
     <ul class="dfe-vertical-nav__section">
       {% for item in guidanceteams %}
@@ -58,7 +58,7 @@
           <a class="dfe-vertical-nav__link" href="{{ item.url }}">{{ item.title }}</a>
         </li>
       {% endfor %}
-    </ul>
+    </ul> #}
 
   {% endif %}
 
