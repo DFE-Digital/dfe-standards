@@ -1,0 +1,96 @@
+<!-- app/views/index.html -->
+{% extends "layouts/layout.html" %}
+{% set selectedNav = "Guidance" %}
+{% set pageName = "Applying standards" %}
+{% set pageDescription = "The purpose of the standards forum and how it works." %}
+
+{% block hero %}
+    <section class="dfe-page-header dfe-page-header--with-sub-nav">
+        <div class="govuk-width-container">
+            <div class="govuk-grid-row">
+                <div class="govuk-grid-column-two-thirds">
+                    <span class="govuk-caption-l  govuk-!-margin-top-5">{{selectedNav}}</span>
+                    <h1 class="govuk-heading-xl">{{pageName}}</h1>
+                    <p class="govuk-body-l govuk-!-margin-bottom-6">{{pageDescription}}</p>
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block content %}
+    <div class="govuk-width-container">
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-one-quarter">
+                {% include "partials/_sidenav.html"%}
+            </div>
+            <div class="govuk-grid-column-three-quarters">
+
+                <p class="govuk-body">Standards exist to ensure we deliver high-quality, secure, and accessible digital, data, and technology (DDT) products and services. Applying the right standards at the right time helps to:</p>
+
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>build consistent and reliable services</li>
+                    <li>reduce risks and improve compliance</li>
+                    <li>meet user needs effectively</li>
+                </ul>
+
+                <p class="govuk-body">This page explains how to apply DDT standards in your role, with examples to make it clearer.</p>
+
+                 <h2 class="govuk-heading-l">Find and review the standards</h2>
+
+                <p class="govuk-body">Use the Standards manual to find the latest version of the standards. Each standard includes:</p>
+
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>the purpose and need for the standard</li>
+                    <li>how to meet the standard</li>
+                    <li>any applicable products or services to help meet or apply it</li>
+                    <li>additional guidance and tools to support understanding the standard</li>
+                </ul>
+
+                <p class="govuk-body">You can also see the history of changes to the standard, to understand how it has evolved over time.</p>
+
+                <p class="govuk-body">The standard published in the manual will always be the latest published version of the standard.</p>
+
+                <h2 class="govuk-heading-l">Understand the standards relevant to your role</h2>
+
+                <p class="govuk-body">Different roles interact with standards in different ways. Start by identifying the standards that apply to your work.</p>
+                
+                <p class="govuk-body">You can filter standards by categories, to help you find standards appropriate for your role or profession.</p>
+                
+                <p class="govuk-body">Some examples:</p>
+
+                <h3 class="govuk-heading-m">Designers</h3>
+                <p class="govuk-body">Focus on accessibility and user-centred design standards to ensure your work is inclusive and meets user needs, branding and style guides.</p>
+
+                <h3 class="govuk-heading-m">Developers</h3>
+                <p class="govuk-body">Look at technical and security standards, such as approved coding practices and data handling requirements.</p>
+
+                <h3 class="govuk-heading-m">User researchers</h3>
+                <p class="govuk-body">Read about how to carry out user research in a safe way, handing participant data and planning research activity.</p>
+
+
+                <h2 class="govuk-heading-l">Review and iterate</h2>
+
+                <p class="govuk-body">Applying standards isn’t a one-off task. Make sure you regularly review your work against standards and check that your project remains compliant as it evolves.</p>
+
+                <p class="govuk-body">Standards may change over time – stay informed by reviewing the Standards Manual regularly and use the standard history against all standards, to check for any changes.</p>
+
+                <p class="govuk-body">If you’re unsure about how to apply a standard, speak to the standard owner listed on the standard.</p>
+
+                <h2 class="govuk-heading-l">Get help and feedback</h2>
+
+                <p class="govuk-body">If you’re unsure about how to apply a standard you can:</p>
+
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>speak to the standard owner listed on the standard</li>
+                    <li>if you’re in a profession with a Head of Profession, speak to them for profession-specific guidance</li>
+                    <li>join a community of practice to learn from colleagues in similar roles</li>
+                    <li>contact the standards forum or use the standards slack channel for more support</li>
+                </ul>
+
+                <p class="govuk-body">If you have suggestions for improvements to the Standards Manual or other products in the standards service, use the feedback feature on the bottom of all pages.</p>
+
+            </div>
+
+        {% endblock %}

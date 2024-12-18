@@ -1,0 +1,146 @@
+<!-- app/views/index.html -->
+{% extends "layouts/layout.html" %}
+{% set selectedNav = "Home" %}
+{% set pagePath = "" %}
+{% set pageName = "Standards manual" %}
+{% set pageDescription = "Understand the guidance, principles, and standards for good service delivery in the Department for Education." %}
+
+{% block hero %}
+    <section class="dfe-page-hero">
+        <div class="govuk-width-container">
+            <div class="govuk-grid-row">
+                <div class="govuk-grid-column-two-thirds">
+                    <h1 class="govuk-heading-xl">{{ pageName }}</h1>
+                    <p class="govuk-body-l">{{ pageDescription }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block content %}
+
+<style>
+    .govuk-notification-banner__content>* {
+    box-sizing: border-box;
+    max-width: 100%;
+}</style>
+
+    <section style="background-color:#ffffff;" class="govuk-!-padding-top-3 govuk-!-padding-bottom-0">
+        <div class="govuk-width-container">
+            <div class="govuk-grid-row">
+                <div class="govuk-grid-column-full" >
+                    <div class="govuk-notification-banner" role="region" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+  <div class="govuk-notification-banner__header">
+    <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
+      Important
+    </h2>
+  </div>
+  <div class="govuk-notification-banner__content">
+    <p class="govuk-notification-banner__heading">
+      A new standards manual is coming
+    </p>
+
+     <p>You can read about the <a class="govuk-notification-banner__link" href="https://design-histories.education.gov.uk/standards-manual-and-management" target="_blank">standards manual and management project <span class="govuk-visually-hidden">(opens in new tab)</span></a> and the changes to the manual.</p>
+  </div>
+</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="background-color:#ffffff;" class="govuk-!-padding-top-0 govuk-!-padding-bottom-9 govuk-!-margin-top-0">
+        <div class="govuk-width-container">
+            <div class="govuk-grid-row">
+                <div class="govuk-grid-column-full">
+                    <div class="govuk-grid-row">
+                        <div class="govuk-grid-column-full">
+
+                            <div class="dfe-banner dfe-o-banner--mirrored govuk-!-margin-top-2">
+                                <div class="dfe-banner__content-container">
+                                    <div class="dfe-banner__inner-content-container">
+                                        <h2 class="govuk-heading-m">How to apply <br>the GOV.UK Service Standard</h2>
+                                        <p>This service helps teams in DfE follow standards to build accessible, usable, safe, secure, and trusted
+                services.</p>
+                                        <p class="govuk-body">
+                                            <a href="https://apply-the-service-standard.education.gov.uk" target="_blank" class="govuk-link govuk-link--no-visited-state govuk-!-font-weight-bold">Visit the service</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="dfe-banner__image-container">
+                                    <figure class="dfe-a-image dfe-a-image--cover">
+                                        <picture class="dfe-a-image__picture">
+                                            <source srcset="/assets/images/assidfe.webp" type="image/webp">
+                                            <img src="/assets/images/assidfe.png" alt="">
+                                        </picture>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="govuk-!-margin-bottom-9">
+        <div class="govuk-width-container">
+
+            <div class="govuk-grid-row">
+
+                <div class="govuk-grid-column-three-quarters">
+
+                    <div class="dfe-grid-container">
+                        <div class="dfe-card">
+                            <div class="dfe-card-container">
+                                <h2 class="govuk-heading-m">
+                                    <a class="govuk-link govuk-link--no-visited-state dfe-card-link--header" href="https://dfe-digital.github.io/architecture/#standards" target="_blank">Architecture</a>
+                                </h2>
+                                <p>Architecture principles, standards and guidance.</p>
+                            </div>
+                        </div>
+                        <div class="dfe-card">
+                            <div class="dfe-card-container">
+                                <h2 class="govuk-heading-m">
+                                    <a class="govuk-link govuk-link--no-visited-state dfe-card-link--header" href="https://design.education.gov.uk" target="_blank">Design</a>
+                                </h2>
+                                <p>Standards for interaction and content designers.</p>
+                            </div>
+                        </div>
+                        <div class="dfe-card">
+                            <div class="dfe-card-container">
+                                <h2 class="govuk-heading-m">
+                                    <a class="govuk-link govuk-link--no-visited-state dfe-card-link--header" href="https://technical-guidance.education.gov.uk" target="_blank">Technical</a>
+                                </h2>
+                                <p>Coding technical standards and guidelines we follow when building services.</p>
+                            </div>
+                        </div>
+                        <div class="dfe-card">
+                            <div class="dfe-card-container">
+                                <h2 class="govuk-heading-m">
+                                    <a class="govuk-link govuk-link--no-visited-state dfe-card-link--header" href="https://user-research.education.gov.uk" target="_blank">User Research </a>
+                                </h2>
+                                <p>Guidance, information and support for user researchers.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="govuk-grid-column-one-quarter">
+                    <div class="dfe-related-content">
+                        <h2 class="govuk-heading-m">Additional guidance</h2>
+                        <ul class="govuk-list govuk-list--spaced">
+                            <li>
+                                <a href="https://www.gov.uk/guidance/the-technology-code-of-practice" target="_blank" class="govuk-link">Technology Code of Practice</a>
+                            </li>
+                            <li>
+                                <a href="https://www.gov.uk/government/publications/cabinet-office-controls/cabinet-office-controls-guidance-version-40" target="_blank" class="govuk-link">Cabinet Office digital spend control</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

@@ -1,0 +1,105 @@
+<!-- app/views/index.html -->
+{% extends "layouts/layout.html" %}
+
+{% set pageName = 'Lifecycle of a standard' %}
+{% set selectedNav = 'Guidance' %}
+{% set pagePath = '/guidance/lifecycle' %}
+{% set pageDescription = "How a standard is created: from an idea through to draft, then published." %}
+
+{% block hero %}
+    <section class="dfe-page-header dfe-page-header--with-sub-nav">
+        <div class="govuk-width-container">
+            <div class="govuk-grid-row">
+                <div class="govuk-grid-column-two-thirds">
+                          <span class="govuk-caption-l  govuk-!-margin-top-5">{{selectedNav}}</span>
+                    <h1 class="govuk-heading-xl">{{pageName}}</h1>
+                    <p class="govuk-body-l govuk-!-margin-bottom-6">{{pageDescription}}</p>
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block content %}
+
+    <section class="govuk-!-margin-bottom-0">
+        <div class="govuk-width-container">
+
+            <div class="govuk-grid-row">
+                <div class="govuk-grid-column-one-quarter">
+
+                    {% include "partials/_sidenav.html"%}
+
+                </div>
+                <div class="govuk-grid-column-three-quarters">
+
+                 
+                    <p class="govuk-body">Standards move through several stages before they are published.</p>
+
+                   <div class="dfe-timeline">
+                    <ol>
+
+                
+
+                        <li>
+                            <h2 class="govuk-heading-m" id="proposal">Propose and draft a standard</h2>
+                            <p class="govuk-body">A new or revised standard is proposed and drafted in a Word document, using a template. Using the template will help you detail the identified need, scope, and objective of the standard.</p>
+                            <p class="govuk-body">It's then discussed and reviewed whether to take it forward by the Head of Profession or profession-specific working groups. </p>
+                            <div class="app-panel">
+                                <h3 class="govuk-heading-m">Standard template</h3>
+                                <p class="govuk-body-s">
+                                    <a href="/downloads/2024-12-04_standard-template.docx" class="govuk-link">2024-12-04_standard-template.docx</a>
+                                </p>
+                                <p class="govuk-body-s  govuk-!-margin-bottom-2">Word - 78KB</p>
+                                <p class="govuk-body-s govuk-!-margin-bottom-0">Last updated: 4 December 2024</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <h2 class="govuk-heading-m" id="standards-forum">Submit for standard forum review</h2>
+                            {# <p class="govuk-body">Use <a href="https://standards-management-concept-f49e65d481be.herokuapp.com/create" target="_blank">Manage DDT standards</a> to submit the proposed standard to the standards forum.</p> #}
+                            <p class="govuk-body">Send an email with a link or copy of your draft standard, to the <a href="mailto:ddt.standards@education.gov.uk">standards inbox</a> for the standards forum for review. They will contact you with next steps.</p>
+                            <p class="govuk-body">The <a href="/guidance/forum" class="govuk-link">forum</a> consists of subject matter experts and key stakeholders who evaluate the standard for accuracy, feasibility, and alignment with department approach to standards. </p>
+                            <p class="govuk-body">A decision is made by the forum who can approve, reject, or ask for amendments to the standard.</p>
+
+                            <p class="govuk-body">In January, there will be a new digital product to submit and manage the standard.</p>
+                        </li>
+                        <li>
+                            <h2 class="govuk-heading-m" id="outcome">Outcome</h2>
+                            <p class="govuk-body">The standards forum will provide feedback to the standard owner and submittor.</p>
+                            <h3 class="govuk-heading-s">Approval</h3>
+                            <p class="govuk-body">The working group approves the standard.</p>
+                            <p class="govuk-body">At this point, comms and other processes are put in place before final publication.</p>
+                            <h3 class="govuk-heading-s">Rejection</h3>
+
+                            <p class="govuk-body">If the standard fails to meet criteria during the review, it is rejected. </p>
+                            <p class="govuk-body">The reasons for rejection are provided back to the owner, and the standard may either be abandoned or revised for resubmission. </p>
+                        </li>
+                        <li>
+                            <h2 class="govuk-heading-m" id="outcome">Published</h2>
+                            <p class="govuk-body">Once approved, the standard can be published and made widely available in the Standards manual.</p>
+                        </li>
+                        <li>
+                            <h2 class="govuk-heading-m" id="outcome">Archived</h2>
+                            <p class="govuk-body">Standards no longer required or abandoned, may be unpublished for an indeterminable amount of time and either revised or republished later.</p>
+                            <p class="govuk-body">Standard could be superseded by another standard.</p>
+                        </li>
+                    </ol>
+                </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+        <style>
+        .app-panel {
+            background-color: #f3f2f1;
+            padding: 2em;
+            margin-bottom: 30px;
+        }
+    </style>
+
+{% endblock %}

@@ -1,0 +1,136 @@
+<!-- app/views/index.html -->
+{% extends "layouts/layout.html" %}
+{% set selectedNav = "Guidance" %}
+{% set pageName = "Definitions" %}
+{% set pageDescription = "These definitions describe the core concepts of the DfE standards framework. " %}
+
+
+{% block hero %}
+    <section class="dfe-page-header dfe-page-header--with-sub-nav">
+        <div class="govuk-width-container">
+            <div class="govuk-grid-row">
+                <div class="govuk-grid-column-two-thirds">
+                           <span class="govuk-caption-l  govuk-!-margin-top-5">{{selectedNav}}</span>
+                    <h1 class="govuk-heading-xl">{{pageName}}</h1>
+                    <p class="govuk-body-l govuk-!-margin-bottom-6">{{pageDescription}}</p>
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block content %}
+
+    <div class="govuk-width-container">
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-one-quarter">
+                {% include "partials/_sidenav.html"%}
+            </div>
+            <div class="govuk-grid-column-three-quarters">
+
+                <h2 class="govuk-heading-l">Core concepts of the DfE standards framework</h2>
+
+                <p class="govuk-body">This diagram shows how the standard concepts fit together.</p>
+
+                <figure class="dfe-a-image dfe-a-image--cover govuk-!-margin-bottom-5">
+                    <picture class="dfe-a-image__picture">
+                        <source srcset="/assets/images/webp/standard-framework.webp" type="image/webp">
+                        <img src="/assets/images/standard-framework.png" alt="">
+                    </picture>
+                </figure>
+
+                <p class="govuk-body">DfE's main principles shape our policies and standards. These are put into action through patterns, which then lead to components and processes. Guidance can be applied to any part of the framework, which makes it flexible and all-encompassing.</p>
+
+                <h2 class="govuk-heading-m">Principle</h2>
+
+                <p class="govuk-body">General rules and values that inform the way we work.</p>
+
+                <p class="govuk-body">Principles are fundamental guidelines and beliefs that guide, inform, and support the way an organisation fulfils its mission. They should be enduring and rarely changed. In the context of DDT (Digital Data Technology), they help make consistent decisions and align digital, data, and technology activities with business goals.</p>
+
+                <p class="govuk-body">Principles can be established within different domains and at different levels. For example, the UK Government sets out various <a href="https://www.gov.uk/guidance/government-design-principles" class="govuk-link">design principles for services</a>. A high-level principle like 'design for accessibility' underscores its importance for all service design. This can then be broken down into more specific 'accessibility' principles that guide a team's thinking and decision-making.</p>
+
+                <p class="govuk-body">Other examples include the <a href="https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/" class="govuk-link">UK General Data Protection Regulation (UK GDPR)</a> and <a href="https://www.security.gov.uk/policy-and-guidance/secure-by-design/" class="govuk-link">Secure by Design</a>, which provide high-level principles on data protection and enhancing cyber resilience in government organisations.</p>
+
+                <h2 class="govuk-heading-m">Policy</h2>
+
+                <p class="govuk-body">Statements of intent for compliance, security and behaviour in the organisation.</p>
+
+                <p class="govuk-body">In Government, 'policy is about delivering change in the real world'. It has intent. DfE's policy profession defines public policy as 'the management of the Government's role in improving the welfare, security and prosperity of the nation.'</p>
+
+                <p class="govuk-body">Within DfE, and specifically in the context of DDT, policies relate to our responsible use of data and information, digital innovation and the management of technology resources. They set the direction and establish the foundation for governance of DDT services.</p>
+
+                <p class="govuk-body">Policies provide a framework for decision-making, ethical considerations, and legal and regulatory compliance within the organisation. They define what is expected in terms of compliance, security, and acceptable behaviour within the organisation. They are relatively static, generally only changing when there is a change in regulation or corporate strategy.</p>
+
+                <p class="govuk-body">For example, a <a href="https://educationgovuk.sharepoint.com/sites/lvewp00259/SitePages/Password-for-Life.aspx" class="govuk-link">'Password Policy' (opens DfE intranet)</a> outlines the rules for creating and managing passwords. A <a href="https://educationgovuk.sharepoint.com/sites/lvewp00085/WorkDocs/Forms/AllItems.aspx?id=%2Fsites%2Flvewp00085%2FWorkDocs%2FPolicies%2FApproved%20Policies%2FMust%20to%20Shall%20Updates%20March%202023%2FData%20Lifecycle%20Policy%2Epdf&parent=%2Fsites%2Flvewp00085%2FWorkDocs%2FPolicies%2FApproved%20Policies%2FMust%20to%20Shall%20Updates%20March%202023" class="govuk-link">Data Lifecycle Policy - pdf - 248KB (opens DfE intranet)</a> provides the framework for how teams should consistently handle data throughout its lifecycle journey, to ensure statutory regulations are met.</p>
+
+                <h2 class="govuk-heading-m">Standard</h2>
+
+                <p class="govuk-body">Established norms or requirements that we must comply with, to enact policies.</p>
+
+                <p class="govuk-body">Standards often define products or actions required, and may suggest patterns, processes and components for their implementation.</p>
+
+                <p class="govuk-body">Standards should be accessible to teams so they can understand and plan for delivery obligations. They are enforceable, meaning compliance can be objectively assessed. Standards must also be actionable, achievable, and ideally driven by policy intent.</p>
+
+                <p class="govuk-body">New standards are identified and managed through a lifecycle process, with all standards reviewed at least annually. They can be superseded or retired. Typically, standards fall into the following 3 categories based on a hierarchy of needs.</p>
+
+                <h3 class="govuk-heading-s">Legal and regulatory obligations</h3>
+
+                <p class="govuk-body">These are non-negotiable.</p>
+
+                <p class="govuk-body">They are mandated by law. Organisations must comply or face serious consequences.</p>
+
+                <p class="govuk-body">Examples include <a href="https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/" class="govuk-link">ICO policies for the UK GDPR (General Data Protection Regulation)</a> or the <a href="https://www.gov.uk/guidance/accessibility-requirements-for-public-sector-websites-and-apps" class="govuk-link">Public Sector Bodies (Websites and Mobile Applications)(No. 2) Accessibility Regulations 2018</a>.</p>
+
+                <h3 class="govuk-heading-s">Industry standards</h3>
+                <p class="govuk-body">These can be influenced and must be followed, where mandated.</p>
+                <p class="govuk-body">Established by industry bodies and adopted by the organisation, they offer potential for interoperability and resource sharing across organisations. Although, they require active monitoring as fall outside the organisation's control.</p>
+
+                <p class="govuk-body">Examples include the <a href="https://www.gov.uk/service-manual/service-standard" class="govuk-link">Government Service Standard</a>, <a href="https://www.gov.uk/guidance/the-technology-code-of-practice" class="govuk-link">Technology Code of Practice</a>, <a href="https://www.gov.uk/government/publications/algorithmic-transparency-template" class="govuk-link">Algorithmic Transparency Recording Standard</a>, or <a href="https://www.iso.org/standard/iso-iec-27000-family" class="govuk-link">ISO 27001 for Information Security Management</a>.</p>
+
+                <h3 class="govuk-heading-s">Organisational standards</h3>
+
+                <p class="govuk-body">These are decided internally based on business aspirations.</p>
+                <p class="govuk-body">Examples include selection of standard technology products to support portfolio consolidation. DfE's technical standards are currently stored in the <a href="https://educationgovuk.sharepoint.com/sites/gp/SitePages/repository.aspx" class="govuk-link">architecture repository</a>.</p>
+                <p class="govuk-body">Managing these standards requires processes to handle exceptions, grant exemptions, and update them as needed over time.</p>
+
+                <h2 class="govuk-heading-m">Pattern</h2>
+                <p class="govuk-body">Reusable common solutions that help us comply with standards.</p>
+                <p class="govuk-body">A pattern is a solution that has been useful in one practical context and is likely to be useful in others.</p>
+                <p class="govuk-body">Patterns provide reusable, standardised and proven ways to solve problems. They can either be standards themselves, or recommended methods for implementing standard solutions, or components for specific use cases. For instance, they describe reusable solutions to common problems.</p>
+                <p class="govuk-body">Patterns guide you on how, when, and why to use components, and what trade-offs to consider. Components are the elements you use. </p>
+                <p class="govuk-body">A 'design pattern' refers to any pattern addressing issues of software architecture, service design, or software development.</p>
+
+                <h2 class="govuk-heading-m">Component</h2>
+                <p class="govuk-body">A reusable building block</p>
+                <p class="govuk-body">A component is a modular, self-contained unit or element that can be created once and reused multiple times in different services or business contexts.</p>
+                <p class="govuk-body">Components act as building blocks, usually linked to a business or technical capability, which can be combined to deliver more complex services or systems.</p>
+                <p class="govuk-body">Components are often used in conjunction with patterns. Patterns explain which components to use and how to use them.</p>
+                <p class="govuk-body">Components need to be managed to ensure they are compatible, secure, scalable, and follow the relevant standards and policies within the DDT standards framework.</p>
+
+                <h2 class="govuk-heading-m">Process</h2>
+                <p class="govuk-body">A process is a series of related or structured activities that produce an output, which helps achieve a business goal.</p>
+                <p class="govuk-body">Business processes are often shown as a flowchart or a sequence of activities.</p>
+                <p class="govuk-body">This flowchart should help understand key decision points, any associated rules, outputs, or sub-processes. An example of a process could be the steps involved in managing incidents or requests within a digital service.</p>
+
+                <h2 class="govuk-heading-m">Guidance</h2>
+                <p class="govuk-body">Everything else is guidance.</p>
+                <p class="govuk-body">Guidance is organised information that will direct you to the appropriate policies, principles, standards, patterns, components, and processes relevant to your work.</p>
+                <p class="govuk-body">Guidance may be found in a manual, handbook, or playbook.</p>
+
+                <h2 class="govuk-heading-m">How these concepts relate to and differ from each other</h2>
+                <h3 class="govuk-heading-s">Scope</h3>
+                <p class="govuk-body">Policies and principles are broad and provide overall guidance, while standards and patterns are more detailed.</p>
+                <p class="govuk-body"></p>
+
+                <h3 class="govuk-heading-s">Mandatory vs. Recommended</h3>
+                <p class="govuk-body">Policies and standards are usually mandatory and enforceable, whereas principles and patterns are often suggested best practices.</p>
+                <h3 class="govuk-heading-s">Flexibility</h3>
+                <p class="govuk-body">Principles allow more flexibility and can be interpreted in different ways, whereas standards and patterns provide specific instructions or solutions.</p>
+                <h3 class="govuk-heading-s">Purpose</h3>
+                <p class="govuk-body">Policies set the direction, principles guide decisions, standards ensure compliance, and patterns offer specific solutions.</p>
+            </div>
+
+        </div>
+
+    {% endblock %}

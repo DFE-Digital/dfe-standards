@@ -1,0 +1,95 @@
+<!-- app/views/index.html -->
+{% extends "layouts/layout.html" %}
+{% set selectedNav = "Guidance" %}
+{% set pageName = "Standards forum" %}
+{% set pageDescription = "The purpose of the standards forum and how it works." %}
+
+{% block hero %}
+    <section class="dfe-page-header dfe-page-header--with-sub-nav">
+        <div class="govuk-width-container">
+            <div class="govuk-grid-row">
+                <div class="govuk-grid-column-two-thirds">
+                    <span class="govuk-caption-l  govuk-!-margin-top-5">{{selectedNav}}</span>
+                    <h1 class="govuk-heading-xl">{{pageName}}</h1>
+                    <p class="govuk-body-l govuk-!-margin-bottom-6">{{pageDescription}}</p>
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block content %}
+    <div class="govuk-width-container">
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-one-quarter">
+                {% include "partials/_sidenav.html"%}
+            </div>
+            <div class="govuk-grid-column-three-quarters">
+
+        
+
+                <p class="govuk-body">The goal of the standards forum is to maintain a single, accessible framework of digital, data and technology standards for DfE, so specialists in teams can design and deliver compliant services, efficiently.</p>
+
+                <h2 class="govuk-heading-m">What the standards forum does</h2>
+
+                <p class="govuk-body">Ensure effective oversight and reporting of all standards with clear accountability.</p>
+
+                <p class="govuk-body">The forum does this through the following actions.</p>
+
+                <h3 class="govuk-heading-s">Approving standards</h3>
+
+                <p class="govuk-body">The forum ensures standards are seamlessly integrated across all aspects of digital, data and technology in DfE.</p>
+
+                <p class="govuk-body">They assess whether standards are written clearly and can be understood.</p>
+
+                <h3 class="govuk-heading-s">Reviewing standards</h3>
+
+                <p class="govuk-body">The forum periodically review existing standards and exceptions. This ensures standards remain current, relevant, and achievable.</p>
+
+                <p class="govuk-body">Standards should evolve as needed to adapt to changing circumstances.</p>
+
+                <h3 class="govuk-heading-s">Ensure access to standards</h3>
+
+                <p class="govuk-body">The forum will make sure all users have easy access to the established standards.</p>
+
+                <p class="govuk-body">Transparency and availability are essential for compliance.</p>
+
+                <h2 class="govuk-heading-m">Who is in the forum</h2>
+
+                <p class="govuk-body">Core members include Heads of Profession. The chair of each forum will rotate between the core members.</p>
+                <p class="govuk-body">General attendees depends on what standards are being reviewed. A meeting usually includes profession leads, representatives from the <a href="https://educationgovuk.sharepoint.com/sites/ServiceHealthCheckHub" class="govuk-link">Service Health Check App (opens DfE intranet)</a> and Deputy Directors (DDs) sponsoring relevant standards.</p>
+
+                <h2 class="govuk-heading-m">Standards forum meetings</h2>
+
+                <p class="govuk-body">The standards forum meets once a week.</p>
+
+                <p class="govuk-body">The forum are alerted to standards being submitted for review via the email address <a href="https://educationgovuk.sharepoint.com/sites/ServiceHealthCheckHub" class="govuk-link">ddt.standards@education.gov.uk</a>.</p>
+
+                <p class="govuk-body">The minumum number of people in the forum is 2 core members. This includes a Head of Profession and a profession lead relevant to the standards being reviewed.</p>
+
+                <p class="govuk-body">Standards forum agenda:</p>
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>review standards</li>
+                    <li>review escalated exceptions</li>
+                    <li>any other business (AOB)</li>
+                </ul>
+                <h3 class="govuk-heading-s">What the forum will review</h3>
+
+                <p class="govuk-body">New standards and any supporting material. Standards must be submitted via the standards manual (interim arrangements may be emailed a Word document).</p>
+
+                <p class="govuk-body">Published standards that require re-review, as determined by their review date on the standards manual.</p>
+
+                <h3 class="govuk-heading-s">What the forum will output</h3>
+
+                <p class="govuk-body">Approved standards, with agreements to publish on the <a class="govuk-link" href="/standards">standards manual</a>.</p>
+
+                <p class="govuk-body">Recommendations to standards owners for any amendments.</p>
+
+                <p class="govuk-body">Recommendations on standard creation or priority areas.</p>
+
+                <p class="govuk-body">Escalations to Digital, Data, Technology senior leadership team or design and delivery board.</p>
+
+            </div>
+
+        {% endblock %}

@@ -1,0 +1,213 @@
+<!-- app/views/index.html -->
+{% extends "layouts/layout.html" %}
+
+{% set pageName = standard.title %}
+{% set selectedNav = 'Standards' %}
+{% set pagePath = '/standard/{{standard.slug}}' %}
+
+{% block hero %}
+    <div class="dfe-page-header dfe-page-header--with-sub-nav">
+        <div class="govuk-width-container dfe-width-container ">
+            <div class="govuk-grid-row">
+                <div class="govuk-grid-column-full">
+                    <a href="/standards" class="govuk-back-link">Back</a>
+                    <h1 class="govuk-heading-xl govuk-!-margin-bottom-3 govuk-!-margin-top-5">{{ standard.title }}</h1>
+
+                    <table class="govuk-table  govuk-!-margin-bottom-5">
+                        <thead class="govuk-table__head">
+                            <tr class="govuk-table__row">
+                                <th class="govuk-table__header" scope="col">Reference</th>
+                                <th class="govuk-table__header" scope="col">Version</th>
+                                <th class="govuk-table__header" scope="col">Published</th>
+                                <th class="govuk-table__header" scope="col">Updated</th>
+                            </tr>
+                        </thead>
+                        <tbody class="govuk-table__body">
+                            <tr class="govuk-table__row">
+                                <td class="govuk-table__cell">STD{{standard.id}}</td>
+                                <td class="govuk-table__cell">{{standard.version}}</td>
+                                <td class="govuk-table__cell">{{standard.firstPublished | date('D MMMM YYYY')}}</td>
+                                <td class="govuk-table__cell">{{standard.lastUpdated | date('D MMMM YYYY')}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<section class="govuk-!-margin-bottom-0">
+    <div class="govuk-width-container">
+
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-one-quarter sticky">
+
+                <h2 class="govuk-heading-m">Contents</h2>
+
+                <nav class="govuk-link-list sticky">
+                    <ul class="govuk-list govuk-list--spaced">
+                        <li class="govuk-link-list__item">
+                            <a href="#summary" class="govuk-link" data-target="summary">Summary</a>
+                        </li>
+                        <li class="govuk-link-list__item">
+                            <a href="#categories" class="govuk-link" data-target="categories">Categories</a>
+                        </li>
+                        <li class="govuk-link-list__item">
+                            <a href="#purpose" class="govuk-link" data-target="purpose">Purpose</a>
+                        </li>
+                        <li class="govuk-link-list__item">
+                            <a href="#howtommeet" class="govuk-link" data-target="howtommeet">How to meet this standard</a>
+                        </li>
+                        {% if standard.approvedProducts | length %}
+                            <li class="govuk-link-list__item">
+                                <a href="#approvedproducts" class="govuk-link" data-target="approvedproducts">Approved products</a>
+                            </li>
+                        {% endif %}
+                        {% if standard.toleratedProducts | length %}
+                            <li class="govuk-link-list__item">
+                                <a href="#toleratedproducts" class="govuk-link" data-target="toleratedproducts">Tolerated products</a>
+                            </li>
+                        {% endif %}
+                        {% if standard.exceptions | length %}
+                            <li class="govuk-link-list__item">
+                                <a href="#exceptions" class="govuk-link" data-target="exceptions">Exceptions</a>
+                            </li>
+                        {% endif %}
+                        <li class="govuk-link-list__item">
+                            <a href="#owners" class="govuk-link" data-target="owners">Owners and contacts</a>
+                        </li>
+                        {% if standard.relatedGuidance %}
+                            <li class="govuk-link-list__item">
+                                <a href="#relatedGuidance" class="govuk-link" data-target="relatedGuidance">Related guidance</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+
+            </div>
+            <div class="govuk-grid-column-three-quarters">
+
+                <h2 id="summary" class="govuk-heading-l">Summary</h2>
+                <p class="govuk-body">{% markdown %}{{standard.summary | safe }}{% endmarkdown %}</p>
+
+                {% if standard.legalStandard == true %}
+                  
+                    <div class="govuk-warning-text">
+                        <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                        <strong class="govuk-warning-text__text">
+                            <span class="govuk-visually-hidden">Warning</span>You are breaking the law if you do not meet this standard.
+  </strong>
+                    </div>
+
+                   
+                {% endif %}
+
+                <h2 id="categories" class="govuk-heading-l">Categories</h2>
+                <p>The categories applicable to this standard are:</p>
+
+                <dl class="govuk-summary-list">
+                    {% for category in standard.categories %}
+                        <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
+                            <dt class="govuk-summary-list__key">
+                                {{ category.title }}
+                            </dt>
+                            <dd class="govuk-summary-list__value">
+                                <ul class="govuk-list">
+                                    {% for subCategory in standard.sub_categories %}
+                                        {% if subCategory.category.id == category.id %}
+                                            <li>{{ subCategory.title }}</li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </dd>
+                        </div>
+                    {% endfor %}
+                </dl>
+
+                <h2 id="purpose" class="govuk-heading-l">Purpose</h2>
+                <p class="govuk-body">{% markdown %}{{standard.purpose | safe }}{% endmarkdown %}</p>
+
+                <h2 id="howtommeet" class="govuk-heading-l">How to meet this standard</h2>
+                <p class="govuk-body">{% markdown %}{{standard.howToMeet | safe }}{% endmarkdown %}</p>
+
+                {% if standard.approvedProducts | length%}
+
+                    <h2 id="approvedproducts" class="govuk-heading-l">Approved products</h2>
+                    <p class="govuk-body">{{standard.approvedProducts}}</p>
+
+                {% endif %}
+
+                {% if standard.toleratedProducts | length%}
+
+                    <h2 id="toleratedproducts" class="govuk-heading-l">Tolerated products</h2>
+                    <p class="govuk-body">{{standard.toleratedProducts}}</p>
+                {% endif %}
+
+                {% if standard.exceptions | length%}
+
+                    <h2 id="exceptions" class="govuk-heading-l">Exceptions</h2>
+                    <p class="govuk-body">{{standard.exceptions}}</p>
+                {% endif %}
+
+                <h2 id="owners" class="govuk-heading-l">Owner and contacts</h2>
+
+                <dl class="govuk-summary-list">
+                    {% for person in standard.owners %}
+                        <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
+                            <dt class="govuk-summary-list__key">
+                               Standard owner
+                            </dt>
+                            <dd class="govuk-summary-list__value">
+                                <a href="mailto:{{person.email}}">{{person.firstName}}
+                                    {{person.lastName}}</a>
+                            </dd>
+                        </div>
+                    {% endfor %}
+                    {% for person in standard.contacts %}
+                        <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
+                            <dt class="govuk-summary-list__key">
+                               Other point of contact
+                            </dt>
+                            <dd class="govuk-summary-list__value">
+                                <a href="mailto:{{person.email}}">{{person.firstName}}
+                                    {{person.lastName}}</a>
+                            </dd>
+                        </div>
+                    {% endfor %}
+                </dl>
+
+                {% if standard.relatedGuidance%}
+
+                    <h2 id="relatedGuidance" class="govuk-heading-l">Related guidance</h2>
+                    <p class="govuk-body">{% markdown %}{{standard.relatedGuidance | safe }}{% endmarkdown %}</p>
+                {% endif %}
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<style>
+
+    @media (min-width: 768px) {
+        /* Apply sticky for larger screens */
+        .sticky {
+            position: sticky;
+            top: 20px;
+            z-index: 10;
+        }
+    }
+
+    @media (max-width: 767px) {
+        /* For smaller devices, default behavior */
+        .sticky {
+            position: relative;
+        }
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,268 @@
+<!-- app/views/index.html -->
+{% extends "layouts/layout.html" %}
+
+{% set pageName = 'Published standards'%}
+{% set selectedNav = 'Standards' %}
+{% set pagePath = '/standards' %}
+
+{% block content %}
+
+    <section class="govuk-!-margin-bottom-0">
+        <div class="govuk-width-container">
+        
+            <div class="govuk-grid-row">
+                <div class="govuk-grid-column-one-third">
+                    <div class="govuk-summary-card">
+                        <div class="govuk-summary-card__title-wrapper">
+                            <h3 class="govuk-summary-card__title">Filters</h3>
+                            <ul class="govuk-summary-card__actions">
+                                <li class="govuk-summary-card__action">
+                                    <a class="govuk-link" href="/standards">Clear</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="govuk-summary-card__content">
+                            <div class="govuk-form-group">
+                                <label id="filterTableLabel" for="filterTable" class="govuk-label govuk-!-font-weight-bold">Keywords</label>
+                                <input type="text" id="filterTable" class="govuk-input" aria-describedby="filterTableLabel" />
+                            </div>
+                            <div class="govuk-form-group">
+                                <fieldset class="govuk-fieldset">
+                                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                            Category
+                        </legend>
+                                    <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+                                        {% for category in categories %}
+                                            <div class="govuk-checkboxes__item">
+                                                <input class="govuk-checkboxes__input" id="category_{{loop.index}}" name="category" type="checkbox"
+                                    value="{{category.slug}}">
+                                                <label class="govuk-label govuk-checkboxes__label" for="category_{{loop.index}}">
+                                                    {{category.title}}
+                                                </label>
+                                            </div>
+                                        {% endfor %}
+
+                                    </div>
+                                </fieldset>
+                            </div>
+
+                            <button type="submit" class="govuk-button" data-module="govuk-button" id="applyFilters">Apply filters</button>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="govuk-grid-column-two-thirds">
+
+ <h1 class="govuk-heading-l">All published standards</h1>
+                 <p id="count"></p>
+
+            
+            {% if standards | length %}
+                <table id="standardsTable" class="govuk-table">
+
+                    <thead class="govuk-table__head">
+                        <tr class="govuk-table__row">
+                            <th scope="col" class="govuk-table__header govuk-!-width-one-half">Standard</th>
+                            <th scope="col" class="govuk-table__header">Number</th>
+                            <th scope="col" class="govuk-table__header govuk-!-width-one-quarter">Categories</th>
+                        </tr>
+                    </thead>
+                    <tbody class="govuk-table__body">
+                        {% for standard in standards %}
+                            <tr class="govuk-table__row" data-category="{% for category in standard.categories %}{{ category.slug }}{% if not loop.last %},{% endif %}{% endfor %}">
+                                <td class="govuk-table__cell">
+                                    <a href="/standard/{{ standard.slug }}" class="govuk-link govuk-link--no-visited-state">
+                                        {{ standard.title or "New" }}
+                                    </a>
+                                </td>
+                                <td class="govuk-table__cell">DDTS{{ standard.id }}</td>
+                                <td class="govuk-table__cell">
+                                    <ul class="govuk-list govuk-!-margin-bottom-0">
+                                        {% for category in standard.categories %}
+                                            <li>{{ category.title }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+             
+
+                {% if standards | length > 10 %}
+
+                <nav class="govuk-pagination" aria-label="Pagination">
+                
+                    <ul class="govuk-pagination__list">
+                        <li class="govuk-pagination__item  govuk-pagination__item--current">
+                            <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 1">
+        1
+      </a>
+                        </li>
+                        <li class="govuk-pagination__item">
+                            <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 2" aria-current="page">
+        2
+      </a>
+                        </li>
+                        <li class="govuk-pagination__item">
+                            <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 3">
+        3
+      </a>
+                        </li>
+                    </ul>
+                    <div class="govuk-pagination__next">
+                        <a class="govuk-link govuk-pagination__link" href="#" rel="next">
+                            <span class="govuk-pagination__link-title">
+        Next<span class="govuk-visually-hidden"> page</span>
+                            </span>
+                            <svg class="govuk-pagination__icon govuk-pagination__icon--next" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
+                                <path d="m8.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7266z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </nav>
+
+                {% endif %}
+
+                <div id="noResultsMessage" style="display: none;">
+                 
+                    <p>There are no results for the selected filter.</p>
+                </div>
+            {% else %}
+         
+            {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const filterInput = document.getElementById("filterTable");
+    const checkboxes = document.querySelectorAll("input[name='category']");
+    const applyFiltersButton = document.getElementById("applyFilters");
+    const table = document.getElementById("standardsTable");
+    const noResultsMessage = document.getElementById("noResultsMessage");
+    const tableRows = document.querySelectorAll(".govuk-table__body .govuk-table__row");
+    const count = document.getElementById("count");
+    const header = document.querySelector("h1.govuk-heading-l");
+
+    const selectedFiltersContainer = document.createElement("p");
+    selectedFiltersContainer.id = "selectedFilters";
+    selectedFiltersContainer.className = "govuk-body";
+    selectedFiltersContainer.style.marginTop = "1em";
+    table.parentNode.insertBefore(selectedFiltersContainer, table);
+
+    // Function to display selected filters
+    function displaySelectedFilters() {
+        const selectedCheckboxes = Array.from(checkboxes).filter(cb => cb.checked);
+        const filterLabels = selectedCheckboxes.map(cb => cb.nextElementSibling.textContent.trim());
+
+        const searchTerm = filterInput.value.trim();
+        let filtersText = "";
+
+        if (searchTerm) {
+            filtersText += `Keywords: "<strong>${searchTerm}</strong>"`;
+        }
+        if (filterLabels.length > 0) {
+            if (filtersText) filtersText += " | "; // Separate with a pipe
+            filtersText += `Categories: <strong>${filterLabels.join(", ")}</strong>`;
+        }
+
+        if (filtersText) {
+            selectedFiltersContainer.innerHTML = `Active filters: ${filtersText}`;
+            selectedFiltersContainer.style.display = "block";
+        } else {
+            selectedFiltersContainer.style.display = "none";
+        }
+    }
+
+    // Function to update header text
+    function updateHeader(visibleRowCount) {
+        const hasFilters = filterInput.value.trim() !== "" || Array.from(checkboxes).some(cb => cb.checked);
+
+        if (hasFilters) {
+            header.textContent = `${visibleRowCount} result${visibleRowCount === 1 ? "" : "s"}`;
+        } else {
+            header.textContent = "All published standards";
+        }
+    }
+
+    // Function to apply filters
+    function applyFilters() {
+        const searchTerm = filterInput.value.toLowerCase().trim();
+        const selectedCategories = Array.from(checkboxes)
+            .filter(checkbox => checkbox.checked)
+            .map(checkbox => checkbox.value);
+
+        let visibleRowCount = 0;
+
+        tableRows.forEach(row => {
+            const rowCategoriesAttr = row.getAttribute("data-category");
+            const rowCategories = rowCategoriesAttr ? rowCategoriesAttr.split(",") : [];
+
+            const cellText = Array.from(row.querySelectorAll("td"))
+                .map(cell => cell.textContent.toLowerCase())
+                .join(" ");
+
+            const matchesKeyword = searchTerm === "" || cellText.includes(searchTerm);
+            const matchesCategory = selectedCategories.length === 0 || selectedCategories.some(category => rowCategories.includes(category));
+
+            if (matchesKeyword && matchesCategory) {
+                row.style.display = "";
+                visibleRowCount++;
+            } else {
+                row.style.display = "none";
+            }
+        });
+
+        // Toggle visibility
+        if (visibleRowCount > 0) {
+            table.style.display = "";
+            noResultsMessage.style.display = "none";
+        } else {
+            table.style.display = "none";
+            noResultsMessage.style.display = "block";
+        }
+
+        // Update count, selected filters, and header
+        
+        displaySelectedFilters();
+        updateHeader(visibleRowCount);
+    }
+
+    // Debounce function to limit filter calls
+    function debounce(func, delay) {
+        let timer;
+        return function (...args) {
+            clearTimeout(timer);
+            timer = setTimeout(() => func.apply(this, args), delay);
+        };
+    }
+
+    // Event listeners
+    const debouncedFilter = debounce(applyFilters, 300);
+
+    filterInput.addEventListener("input", debouncedFilter);
+    checkboxes.forEach(checkbox => checkbox.addEventListener("change", applyFilters));
+
+    applyFiltersButton.addEventListener("click", function (event) {
+        event.preventDefault();
+        applyFilters();
+    });
+
+    // Initial display
+    applyFilters();
+});
+</script>
+
+
+
+
+
+
+
+{% endblock %}

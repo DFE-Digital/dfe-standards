@@ -1,0 +1,55 @@
+<!-- app/views/index.html -->
+{% extends "layouts/layout.html" %}
+
+{% set pageName = 'Guidance' %}
+{% set selectedNav = 'Guidance' %}
+{% set pagePath = '/guidance' %}
+{% set pageDescription = "Information and guidance for drafting and using standards in the Department for Education." %}
+
+{% block hero %}
+    <section class="dfe-page-header dfe-page-header--with-sub-nav">
+        <div class="govuk-width-container">
+            <div class="govuk-grid-row">
+                <div class="govuk-grid-column-two-thirds">
+                    <span class="govuk-caption-l  govuk-!-margin-top-5">{{selectedNav}}</span>
+                    <h1 class="govuk-heading-xl">{{pageName}}</h1>
+                    <p class="govuk-body-l govuk-!-margin-bottom-6">{{pageDescription}}</p>
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block content %}
+
+    <section class="govuk-!-margin-bottom-0">
+        <div class="govuk-width-container">
+
+            <div class="govuk-grid-row">
+                <div class="govuk-grid-column-one-quarter">
+
+                    {% include "partials/_sidenav.html"%}
+
+                </div>
+                <div class="govuk-grid-column-three-quarters">
+
+                 
+
+                    <p class="govuk-body">Standards are rules or guidelines that need to be followed. You must meet the relevant standards to ensure the expected quality levels for your service.</p>
+                    <p class="govuk-body">By following a common set of standards, we ensure consistency across the department and give ourselves a framework where we can measure compliance.</p>
+
+                    <p class="govuk-body">Standards should be:</p>
+
+                    <ul class="govuk-list govuk-list--bullet">
+                        <li>easy to access, so everyone understands what they need to include as part of their delivery needs and can plan for this</li>
+                        <li>clear and simple, so it's easy to check if something meets a standard</li>
+                        <li>flexible, so they can change over time, if needed, as we update and manage new standards</li>
+                    </ul>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
