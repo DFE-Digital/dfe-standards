@@ -38,6 +38,7 @@ markdown.register(nunjuckEnv, marked.parse)
 
 app.locals.serviceName = process.env.serviceName;
 app.locals.cmsEnabled = process.env.cmsEnabled;
+app.locals.staging = process.env.staging === 'true' ? true : false;
 
 // Serve static files from govuk-frontend and dfe-frontend
 app.use('/govuk', express.static(path.join(__dirname, 'node_modules/govuk-frontend/govuk/assets')));
