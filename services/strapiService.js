@@ -302,6 +302,9 @@ const getStandard = async (slug) => {
                     },
                     contacts: {
                         populate: '*' // Populate the nested permissions.user relationship
+                    },
+                    phases: {
+                        populate: '*' // Populate the nested phases relationship
                     }
                 }
             }
