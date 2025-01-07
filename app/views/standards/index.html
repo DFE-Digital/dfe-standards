@@ -1,9 +1,23 @@
 <!-- app/views/index.html -->
 {% extends "layouts/layout.html" %}
 
-{% set pageName = 'Published standards'%}
+{% set pageName = 'Standards'%}
 {% set selectedNav = 'Standards' %}
 {% set pagePath = '/standards' %}
+
+{% block hero %}
+    <section class="dfe-page-header dfe-page-header--with-sub-nav">
+        <div class="govuk-width-container">
+            <div class="govuk-grid-row">
+                <div class="govuk-grid-column-two-thirds">
+                    <h1 class="govuk-heading-xl govuk-!-margin-top-5">{{pageName}}</h1>
+                    <p class="govuk-body-l govuk-!-margin-bottom-6">{{pageDescription}}</p>
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
 
 {% block content %}
 
