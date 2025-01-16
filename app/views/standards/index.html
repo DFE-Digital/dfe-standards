@@ -36,6 +36,8 @@
                             </ul>
                         </div>
                         <div class="govuk-summary-card__content">
+
+           
                             <div class="govuk-form-group">
                                 <label id="filterTableLabel" for="filterTable" class="govuk-label govuk-!-font-weight-bold">Keywords</label>
                                 <input type="text" id="filterTable" class="govuk-input" aria-describedby="filterTableLabel" />
@@ -90,7 +92,7 @@
                                         {{ standard.title or "New" }}
                                     </a>
                                 </td>
-                                <td class="govuk-table__cell">DDTS{{ standard.standardId }}</td>
+                                <td class="govuk-table__cell">DDTS-{{ standard.standardId }}</td>
                                 <td class="govuk-table__cell">
                                     <ul class="govuk-list govuk-!-margin-bottom-0">
                                         {% for category in standard.categories %}

@@ -36,9 +36,15 @@ var nunjuckEnv = nunjucks.configure([
 nunjuckEnv.addFilter('date', dateFilter)
 markdown.register(nunjuckEnv, marked.parse)
 
+// Create a nunjucks filter to format version numbers to 2 dp
+nunjuckEnv.addFilter('formatVersion', function (num) {
+    return parseFloat(num).toFixed(2);
+});
+
 app.locals.serviceName = process.env.serviceName;
 app.locals.cmsEnabled = process.env.cmsEnabled;
 app.locals.staging = process.env.staging === 'true' ? true : false;
+app.locals.createURL = process.env.CREATE_MANAGE_URL;
 
 // Serve static files from govuk-frontend and dfe-frontend
 app.use('/govuk', express.static(path.join(__dirname, 'node_modules/govuk-frontend/govuk/assets')));
