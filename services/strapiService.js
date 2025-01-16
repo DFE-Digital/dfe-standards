@@ -81,7 +81,7 @@ const getStandardsForList = async () => {
         const response = await strapiClient.get('/api/standards', {
             params: {
                 sort: 'title',
-                fields: 'id,title,slug',
+                fields: 'id,title,slug,standardId',
                 populate: '*',
             },
         });
@@ -219,11 +219,6 @@ const getStandards = async () => {
 const getCategoryTitles = async () => {
     const cacheKey = 'active_categories_titles_slugs';
 
-    // Check if data is in cache
-    if (cache.has(cacheKey)) {
-        logger.info('Fetching active categories titles and slugs from cache');
-        return cache.get(cacheKey);
-    }
 
     try {
         logger.info('Fetching active categories titles and slugs from Strapi');
@@ -231,7 +226,6 @@ const getCategoryTitles = async () => {
         const response = await strapiClient.get('/api/categories', {
             params: {
                 sort: 'title',
-                populate: '*', // Adjust this if you need specific relations
                 filters: {
                     active: true
                 },
@@ -302,6 +296,10 @@ const getStandard = async (slug) => {
                     },
                     contacts: {
                         populate: '*' // Populate the nested permissions.user relationship
+                    },
+                    phases: {
+                        populate: '*', // Populate the nested phases relationship
+                        sort: ['id:asc']
                     }
                 }
             }

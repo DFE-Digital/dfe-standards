@@ -2,8 +2,8 @@
 {% extends "layouts/layout.html" %}
 {% set selectedNav = "Home" %}
 {% set pagePath = "" %}
-{% set pageName = "Standards manual" %}
-{% set pageDescription = "Understand the guidance, principles, and standards for good service delivery in the Department for Education." %}
+{% set pageName = serviceName%}
+{% set pageDescription = "Digital, data and technology standards to support good service delivery in the Department for Education." %}
 
 {% block hero %}
     <section class="dfe-page-hero">
@@ -25,32 +25,22 @@
 
             <div class="govuk-grid-row">
                 <div class="govuk-grid-column-full">
-                    <h2 class="govuk-heading-l">DfE Standards</h2>
-                    <p class="govuk-body-l">The standards you're required to meet, and how to meet them, when building and running services, products and websites in the Department for Education.</p>
-                    <div class="dfe-grid-container govuk-!-margin-top-9">
+                      <div class="dfe-grid-container">
 
                         <div class="dfe-card">
                             <div class="dfe-card-container">
                                 <h3 class="govuk-heading-m">
-                                    <a href="/standards" class="govuk-link govuk-link--no-visited-state dfe-card-link--header">Find a standard</a>
+                                    <a href="/standards" class="govuk-link govuk-link--no-visited-state dfe-card-link--header">Find and use a standard</a>
                                 </h3>
-                                <p>Find and apply standards in your role.</p>
+                                <p>Find and use standards that apply when working in DDT in DfE.</p>
                             </div>
                         </div>
                         <div class="dfe-card">
                             <div class="dfe-card-container">
                                 <h3 class="govuk-heading-m">
-                                    <a href="/guidance/owners" class="govuk-link govuk-link--no-visited-state dfe-card-link--header">Guidance for standard owners</a>
+                                    <a href="{{createURL}}/guidance" class="govuk-link govuk-link--no-visited-state dfe-card-link--header" target="_blank/guidance">Create a standard</a>
                                 </h3>
-                                <p>What it means to be a standard owner and guidance for drafting and getting standards approved and published.</p>
-                            </div>
-                        </div>
-                        <div class="dfe-card">
-                            <div class="dfe-card-container">
-                                <h3 class="govuk-heading-m">
-                                    <a href="/guidance/teams" class="govuk-link govuk-link--no-visited-state dfe-card-link--header">Guidance for teams</a>
-                                </h3>
-                                <p>How to use and apply standards in your role across DfE from technology, business processes to digital delivery, products and services.</p>
+                                <p>Create and manage DDT standards in DfE.</p>
                             </div>
                         </div>
                     </div>
@@ -59,7 +49,7 @@
         </div>
     </section>
 
-    <section style="background-color:#ffffff;" class="govuk-!-padding-top-8 govuk-!-padding-bottom-9 govuk-!-margin-top-0">
+    <section style="background-color:#ffffff;" class="govuk-!-padding-top-5 govuk-!-padding-bottom-5 govuk-!-margin-top-0">
         <div class="govuk-width-container">
             <div class="govuk-grid-row">
                 <div class="govuk-grid-column-full">
@@ -91,26 +81,5 @@
         </div>
     </section>
 
-    <section style="background-color:#f0f4f5;" class="govuk-!-padding-top-8 govuk-!-padding-bottom-9 govuk-!-margin-top-5">
-      <div class="govuk-width-container">
-         <div class="govuk-grid-row">
-
-            <div class="govuk-grid-column-full govuk-!-margin-top-9 govuk-!-margin-bottom-5">
-               <div class="govuk-grid-row split-panel" style="background-color:#f0f4f5;">
-                  <div class="govuk-grid-column-one-half text-column">
-                     <h2 class="govuk-heading-m">Missing a standard?</h2>
-                     <p class="govuk-body">If you cannot find a standard that you think should be in this manual, you can let the Standards Forum know.</p>
-                     <p class="govuk-body">
-                        <a href="/contact" class="govuk-link govuk-link--no-visited-state govuk-!-font-weight-bold">Contact the forum</a>
-                     </p>
-                  </div>
-                  <div class="govuk-grid-column-one-half image-column">
-                     <div class="image-container" style="background-image: url('/assets/images/contact.png');"></div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-   </section>
-
+ 
 {% endblock %}

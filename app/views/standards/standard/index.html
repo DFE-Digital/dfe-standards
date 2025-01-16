@@ -24,8 +24,8 @@
                         </thead>
                         <tbody class="govuk-table__body">
                             <tr class="govuk-table__row">
-                                <td class="govuk-table__cell">STD{{standard.id}}</td>
-                                <td class="govuk-table__cell">{{standard.version}}</td>
+                                <td class="govuk-table__cell">DDTS-{{standard.standardId}}</td>
+                                <td class="govuk-table__cell">v.{{standard.version | formatVersion }}</td>
                                 <td class="govuk-table__cell">{{standard.firstPublished | date('D MMMM YYYY')}}</td>
                                 <td class="govuk-table__cell">{{standard.lastUpdated | date('D MMMM YYYY')}}</td>
                             </tr>
@@ -62,6 +62,11 @@
                         <li class="govuk-link-list__item">
                             <a href="#howtommeet" class="govuk-link" data-target="howtommeet">How to meet this standard</a>
                         </li>
+                        {% if standard.phases | length %}
+                            <li class="govuk-link-list__item">
+                                <a href="#whentommeet" class="govuk-link" data-target="whentommeet">When to meet this standard</a>
+                            </li>
+                        {% endif %}
                         {% if standard.approvedProducts | length %}
                             <li class="govuk-link-list__item">
                                 <a href="#approvedproducts" class="govuk-link" data-target="approvedproducts">Approved products</a>
@@ -77,6 +82,9 @@
                                 <a href="#exceptions" class="govuk-link" data-target="exceptions">Exceptions</a>
                             </li>
                         {% endif %}
+                           <li class="govuk-link-list__item">
+                            <a href="#validityPeriod" class="govuk-link" data-target="owners">Declaring conformance</a>
+                        </li>
                         <li class="govuk-link-list__item">
                             <a href="#owners" class="govuk-link" data-target="owners">Owners and contacts</a>
                         </li>
@@ -95,7 +103,7 @@
                 <p class="govuk-body">{% markdown %}{{standard.summary | safe }}{% endmarkdown %}</p>
 
                 {% if standard.legalStandard == true %}
-                  
+
                     <div class="govuk-warning-text">
                         <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
                         <strong class="govuk-warning-text__text">
@@ -103,7 +111,6 @@
   </strong>
                     </div>
 
-                   
                 {% endif %}
 
                 <h2 id="categories" class="govuk-heading-l">Categories</h2>
@@ -134,6 +141,19 @@
                 <h2 id="howtommeet" class="govuk-heading-l">How to meet this standard</h2>
                 <p class="govuk-body">{% markdown %}{{standard.howToMeet | safe }}{% endmarkdown %}</p>
 
+                {% if standard.phases | length %}
+                    <h2 id="whentommeet" class="govuk-heading-l">When to meet this standard</h2>
+                    <p class="govuk-body">You are required to meet this standard at the following phases of delivery.</p>
+
+                    <ul class="govuk-list govuk-list--bullet">
+
+                        {% for phase in standard.phases %}
+                            <li>{{ phase.Title }}</li>
+                        {% endfor %}
+                    </ul>
+
+                {% endif %}
+
                 {% if standard.approvedProducts | length%}
 
                     <h2 id="approvedproducts" class="govuk-heading-l">Approved products</h2>
@@ -148,9 +168,18 @@
                 {% endif %}
 
                 {% if standard.exceptions | length%}
-
                     <h2 id="exceptions" class="govuk-heading-l">Exceptions</h2>
                     <p class="govuk-body">{{standard.exceptions}}</p>
+                {% endif %}
+
+                {% if standard.validityPeriod%}
+
+                    <h2 id="validityPeriod" class="govuk-heading-l">Declaring conformance with this standard</h2>
+                    {% if standard.validityPeriod === 0 %}
+                        <p class="govuk-body">Conformance with the standard is a one time action through the Service Health Check App.</p>
+                    {% else %}
+                        <p class="govuk-body">Conformance with the standard must be recorded every {{ standard.validityPeriod }} month{% if standard.validityPeriod !== 1 %}s{% endif %} through the Service Health Check App.</p>
+                    {% endif %}
                 {% endif %}
 
                 <h2 id="owners" class="govuk-heading-l">Owner and contacts</h2>
@@ -163,7 +192,7 @@
                             </dt>
                             <dd class="govuk-summary-list__value">
                                 <a href="mailto:{{person.email}}">{{person.firstName}}
-                                    {{person.lastName}}</a>
+                                    {{person.lastName}} ({{person.JobRole}})</a>
                             </dd>
                         </div>
                     {% endfor %}
@@ -174,7 +203,7 @@
                             </dt>
                             <dd class="govuk-summary-list__value">
                                 <a href="mailto:{{person.email}}">{{person.firstName}}
-                                    {{person.lastName}}</a>
+                                    {{person.lastName}} ({{person.JobRole}})</a>
                             </dd>
                         </div>
                     {% endfor %}

@@ -1,9 +1,23 @@
 <!-- app/views/index.html -->
 {% extends "layouts/layout.html" %}
 
-{% set pageName = 'Published standards'%}
+{% set pageName = 'Standards'%}
 {% set selectedNav = 'Standards' %}
 {% set pagePath = '/standards' %}
+
+{% block hero %}
+    <section class="dfe-page-header dfe-page-header--with-sub-nav">
+        <div class="govuk-width-container">
+            <div class="govuk-grid-row">
+                <div class="govuk-grid-column-two-thirds">
+                    <h1 class="govuk-heading-xl govuk-!-margin-top-5">{{pageName}}</h1>
+                    <p class="govuk-body-l govuk-!-margin-bottom-6">{{pageDescription}}</p>
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
 
 {% block content %}
 
@@ -11,7 +25,7 @@
         <div class="govuk-width-container">
         
             <div class="govuk-grid-row">
-                <div class="govuk-grid-column-one-third">
+                <div class="govuk-grid-column-one-quarter">
                     <div class="govuk-summary-card">
                         <div class="govuk-summary-card__title-wrapper">
                             <h3 class="govuk-summary-card__title">Filters</h3>
@@ -22,6 +36,8 @@
                             </ul>
                         </div>
                         <div class="govuk-summary-card__content">
+
+           
                             <div class="govuk-form-group">
                                 <label id="filterTableLabel" for="filterTable" class="govuk-label govuk-!-font-weight-bold">Keywords</label>
                                 <input type="text" id="filterTable" class="govuk-input" aria-describedby="filterTableLabel" />
@@ -52,7 +68,7 @@
                     </div>
 
                 </div>
-                <div class="govuk-grid-column-two-thirds">
+                <div class="govuk-grid-column-three-quarters">
 
  <h1 class="govuk-heading-l">All published standards</h1>
                  <p id="count"></p>
@@ -76,7 +92,7 @@
                                         {{ standard.title or "New" }}
                                     </a>
                                 </td>
-                                <td class="govuk-table__cell">DDTS{{ standard.id }}</td>
+                                <td class="govuk-table__cell">DDTS-{{ standard.standardId }}</td>
                                 <td class="govuk-table__cell">
                                     <ul class="govuk-list govuk-!-margin-bottom-0">
                                         {% for category in standard.categories %}
