@@ -1,36 +1,17 @@
 {% set guidance = [
   {
-    title: "Guidance",
-    url: "/guidance"
+    title: "What standards are",
+    url: "/what-standards-are"
   },{
     title: "Lifecycle of a standard",
     url: "/guidance/lifecycle"
-  },{
-    title: "Standards forum",
-    url: "/guidance/forum"
   }
 ] %}
 
-{% set guidanceowners = [
-   {
-    title: "Definitions",
-    url: "/guidance/definitions"
-  }, {
-    title: "Standard categories",
-    url: "/guidance/categories"
-  }
-] %}
-
-{# {% set guidanceteams = [
-  {
-    title: "Applying standards",
-    url: "/guidance/apply"
-  }
-] %} #}
 
 <nav class="dfe-vertical-nav">
 
-  {%- if selectedNav === "Guidance" %}
+  {%- if selectedNav === "What standards are" %}
 
     <ul class="dfe-vertical-nav__section">
       {% for item in guidance %}
@@ -39,26 +20,6 @@
         </li>
       {% endfor %}
     </ul>
-
-    <h2 class="dfe-vertical-nav--section-header">For standard owners</h2>
-
-    <ul class="dfe-vertical-nav__section">
-      {% for item in guidanceowners %}
-        <li class="dfe-vertical-nav__section-item {% if item.title === pageName  or setSelectedSideNav === item.title %}dfe-vertical-nav__section-item--current{% endif %}">
-          <a class="dfe-vertical-nav__link" href="{{ item.url }}">{{ item.title }}</a>
-        </li>
-      {% endfor %}
-    </ul>
-
-    {# <h2 class="dfe-vertical-nav--section-header">For teams</h2>
-
-    <ul class="dfe-vertical-nav__section">
-      {% for item in guidanceteams %}
-        <li class="dfe-vertical-nav__section-item {% if item.title === pageName  or setSelectedSideNav === item.title %}dfe-vertical-nav__section-item--current{% endif %}">
-          <a class="dfe-vertical-nav__link" href="{{ item.url }}">{{ item.title }}</a>
-        </li>
-      {% endfor %}
-    </ul> #}
 
   {% endif %}
 

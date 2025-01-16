@@ -14,12 +14,15 @@ exports.g_standards = async (req, res, next) => {
         const standards = await strapiService.getStandardsForList();
         const categories = await strapiService.getCategoryTitles();
 
+        console.log(categories)
+
         if (!standards || standards.length === 0) {
             logger.info('No standards found');
             return res.render('standards/index', {
                 standards: [],
                 title: 'Standards',
-                message: 'No standards available at this time.'
+                message: 'No standards available at this time.',
+                categories
             });
         }
 

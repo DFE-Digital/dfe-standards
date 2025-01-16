@@ -2,8 +2,23 @@
 {% extends "layouts/layout.html" %}
 
 {% set pageName = 'Support' %}
+{% set pageDescription = 'Get help and support for using or creating standards.' %}
 {% set selectedNav = 'Support' %}
 {% set pagePath = '/support' %}
+
+{% block hero %}
+    <section class="dfe-page-header dfe-page-header--with-sub-nav">
+        <div class="govuk-width-container">
+            <div class="govuk-grid-row">
+                <div class="govuk-grid-column-two-thirds">
+                    <h1 class="govuk-heading-xl govuk-!-margin-top-5">{{pageName}}</h1>
+                    <p class="govuk-body-l govuk-!-margin-bottom-6">{{pageDescription}}</p>
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
 
 {% block content %}
 
@@ -14,8 +29,6 @@
 
                 <div class="govuk-grid-column-three-quarters">
 
-                    <h1 class="govuk-heading-l">Support</h1>
-
                     <p class="govuk-body">You can get help and support in the following ways:</p>
 
                     <ul class="govuk-list govuk-list--bullet">
@@ -24,11 +37,15 @@
                         </li>
                     </ul>
 
-                    <h2 class="govuk-heading-m">Standards forum</h2>
+                    <h2 class="govuk-heading-l">Help with a specific standard</h2>
 
-                    <p class="govuk-body">The standards forum is a group of people from across the DDT directorate including leads and heads of profession.</p>
+                    <p class="govuk-body">You should contact the named owner or contacts on the standard for help and support in the first instance.</p>
 
-                    <p class="govuk-body">The forum meets regularty to discuss and agree standards, and supports people wanting to develop standards with advice and guidance. </p>
+                    <h2 class="govuk-heading-l">Standards forum</h2>
+
+                    <p class="govuk-body">The standards forum is a group of people from across DDT including leads and heads of profession.</p>
+
+                    <p class="govuk-body">The forum meets regularly to discuss and review standards, and supports people wanting to develop standards with advice and guidance. </p>
 
                 </div>
 

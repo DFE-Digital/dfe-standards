@@ -1,18 +1,17 @@
 <!-- app/views/index.html -->
 {% extends "layouts/layout.html" %}
 
-{% set pageName = 'Guidance' %}
-{% set selectedNav = 'Guidance' %}
-{% set pagePath = '/guidance' %}
-{% set pageDescription = "Information and guidance for drafting and using standards in the Department for Education." %}
+{% set pageName = 'What standards are' %}
+{% set selectedNav = 'What standards are' %}
+{% set pagePath = '/what-standards-are' %}
+{% set pageDescription = "Understanding what standards are, why we have them, and how to apply them in your role." %}
 
 {% block hero %}
     <section class="dfe-page-header dfe-page-header--with-sub-nav">
         <div class="govuk-width-container">
             <div class="govuk-grid-row">
                 <div class="govuk-grid-column-two-thirds">
-                    <span class="govuk-caption-l  govuk-!-margin-top-5">{{selectedNav}}</span>
-                    <h1 class="govuk-heading-xl">{{pageName}}</h1>
+                    <h1 class="govuk-heading-xl govuk-!-margin-top-5">{{pageName}}</h1>
                     <p class="govuk-body-l govuk-!-margin-bottom-6">{{pageDescription}}</p>
 
                 </div>
@@ -20,6 +19,7 @@
         </div>
     </section>
 {% endblock %}
+
 {% block content %}
 
     <section class="govuk-!-margin-bottom-0">
