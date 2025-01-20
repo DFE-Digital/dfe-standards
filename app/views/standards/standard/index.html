@@ -193,6 +193,16 @@
                                             {{ product.useCase}}
                                         </dd>
                                     </div>
+                                       {% if product.externalLink.length %}
+                                     <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
+                                        <dt class="govuk-summary-list__key">
+                                More information
+                            </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            <a href="{{ product.externalLink}}" target="_blank">Visit provider<span class="govuk-visually-hidden"> website for {{ product.title}} (Opens in a new tab)</a></a>
+                                        </dd>
+                                    </div>
+                                          {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -204,7 +214,7 @@
                 {% if standard.toleratedProducts | length%}
 
                     <h2 id="toleratedproducts" class="govuk-heading-l">Tolerated products</h2>
-                     {% for product in standard.toleratedProducts %}
+                    {% for product in standard.toleratedProducts %}
 
                         <div class="govuk-summary-card">
                             <div class="govuk-summary-card__title-wrapper">
@@ -239,6 +249,18 @@
                                             {{ product.useCase}}
                                         </dd>
                                     </div>
+
+                                    {% if product.externalLink.length %}
+                                        <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
+                                            <dt class="govuk-summary-list__key">
+                                More information
+                            </dt>
+                                            <dd class="govuk-summary-list__value">
+                                                <a href="{{ product.externalLink}}" target="_blank">Visit provider<span class="govuk-visually-hidden"> website for {{ product.title}} (Opens in a new tab)</a>
+                                                </a>
+                                            </dd>
+                                        </div>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -299,8 +321,6 @@
         </div>
     </div>
 </div>
-
-
 
 <style>
 
