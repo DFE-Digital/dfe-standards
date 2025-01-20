@@ -11,6 +11,7 @@ router.get('/', homeController.g_homepage);
 
 // Standards routes
 router.get('/standards', standardsController.g_standards);
+router.get('/standards/export', standardsController.g_standards_export);
 router.get('/standard/:slug', standardsController.g_standard);
 
 // Standards routes

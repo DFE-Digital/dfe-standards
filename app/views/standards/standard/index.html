@@ -3,7 +3,8 @@
 
 {% set pageName = standard.title %}
 {% set selectedNav = 'Standards' %}
-{% set pagePath = '/standard/{{standard.slug}}' %}
+{% set pagePath = '/standard/' + standard.slug %}
+{% set pageDescription = standard.summary %}
 
 {% block hero %}
     <div class="dfe-page-header dfe-page-header--with-sub-nav">
@@ -193,16 +194,17 @@
                                             {{ product.useCase}}
                                         </dd>
                                     </div>
-                                       {% if product.externalLink.length %}
-                                     <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
-                                        <dt class="govuk-summary-list__key">
+                                    {% if product.externalLink.length %}
+                                        <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
+                                            <dt class="govuk-summary-list__key">
                                 More information
                             </dt>
-                                        <dd class="govuk-summary-list__value">
-                                            <a href="{{ product.externalLink}}" target="_blank">Visit provider<span class="govuk-visually-hidden"> website for {{ product.title}} (Opens in a new tab)</a></a>
-                                        </dd>
-                                    </div>
-                                          {% endif %}
+                                            <dd class="govuk-summary-list__value">
+                                                <a href="{{ product.externalLink}}" target="_blank">Visit provider<span class="govuk-visually-hidden"> website for {{ product.title}} (Opens in a new tab)</a>
+                                                </a>
+                                            </dd>
+                                        </div>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -315,8 +317,6 @@
                     <h2 id="relatedGuidance" class="govuk-heading-l">Related guidance</h2>
                     <p class="govuk-body">{% markdown %}{{standard.relatedGuidance | safe }}{% endmarkdown %}</p>
                 {% endif %}
-
-                {{ standard | dump }}
 
             </div>
 

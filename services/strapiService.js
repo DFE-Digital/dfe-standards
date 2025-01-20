@@ -81,7 +81,7 @@ const getStandardsForList = async () => {
         const response = await strapiClient.get('/api/standards', {
             params: {
                 sort: 'title',
-                fields: 'id,title,slug,standardId',
+                fields: 'id,title,slug,standardId,summary',
                 populate: '*',
             },
         });
