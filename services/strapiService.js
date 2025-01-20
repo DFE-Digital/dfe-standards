@@ -300,7 +300,16 @@ const getStandard = async (slug) => {
                     phases: {
                         populate: '*', // Populate the nested phases relationship
                         sort: ['id:asc']
-                    }
+                    },
+                    approvedProducts: {
+                        populate: '*' 
+                    },
+                    toleratedProducts: {
+                        populate: '*' 
+                    },
+                    exceptions: {
+                        populate: '*' 
+                    },
                 }
             }
         });

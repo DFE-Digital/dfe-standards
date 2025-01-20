@@ -82,7 +82,7 @@
                                 <a href="#exceptions" class="govuk-link" data-target="exceptions">Exceptions</a>
                             </li>
                         {% endif %}
-                           <li class="govuk-link-list__item">
+                        <li class="govuk-link-list__item">
                             <a href="#validityPeriod" class="govuk-link" data-target="owners">Declaring conformance</a>
                         </li>
                         <li class="govuk-link-list__item">
@@ -157,14 +157,93 @@
                 {% if standard.approvedProducts | length%}
 
                     <h2 id="approvedproducts" class="govuk-heading-l">Approved products</h2>
-                    <p class="govuk-body">{{standard.approvedProducts}}</p>
+
+                    {% for product in standard.approvedProducts %}
+
+                        <div class="govuk-summary-card">
+                            <div class="govuk-summary-card__title-wrapper">
+                                <h2 class="govuk-summary-card__title">
+                                    {{ product.title}}
+                                </h2>
+                            </div>
+                            <div class="govuk-summary-card__content">
+                                <div class="govuk-summary-list">
+
+                                    <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
+                                        <dt class="govuk-summary-list__key">
+                                Vendor
+                            </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            {{ product.vendor}}
+                                        </dd>
+                                    </div>
+                                    <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
+                                        <dt class="govuk-summary-list__key">
+                                Version
+                            </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            {{ product.version}}
+                                        </dd>
+                                    </div>
+                                    <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
+                                        <dt class="govuk-summary-list__key">
+                                Use-case
+                            </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            {{ product.useCase}}
+                                        </dd>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endfor %}
 
                 {% endif %}
 
                 {% if standard.toleratedProducts | length%}
 
                     <h2 id="toleratedproducts" class="govuk-heading-l">Tolerated products</h2>
-                    <p class="govuk-body">{{standard.toleratedProducts}}</p>
+                     {% for product in standard.toleratedProducts %}
+
+                        <div class="govuk-summary-card">
+                            <div class="govuk-summary-card__title-wrapper">
+                                <h2 class="govuk-summary-card__title">
+                                    {{ product.title}}
+                                </h2>
+                            </div>
+                            <div class="govuk-summary-card__content">
+                                <div class="govuk-summary-list">
+
+                                    <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
+                                        <dt class="govuk-summary-list__key">
+                                Vendor
+                            </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            {{ product.vendor}}
+                                        </dd>
+                                    </div>
+                                    <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
+                                        <dt class="govuk-summary-list__key">
+                                Version
+                            </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            {{ product.version}}
+                                        </dd>
+                                    </div>
+                                    <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
+                                        <dt class="govuk-summary-list__key">
+                                Use-case
+                            </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            {{ product.useCase}}
+                                        </dd>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endfor %}
                 {% endif %}
 
                 {% if standard.exceptions | length%}
@@ -220,6 +299,8 @@
         </div>
     </div>
 </div>
+
+
 
 <style>
 
