@@ -279,9 +279,9 @@
 
                     <h2 id="validityPeriod" class="govuk-heading-l">Declaring conformance with this standard</h2>
                     {% if standard.validityPeriod === 0 %}
-                        <p class="govuk-body">Conformance with the standard is a one time action through the Service Health Check App.</p>
+                        <p class="govuk-body">Conformance with the standard is a one time action.</p>
                     {% else %}
-                        <p class="govuk-body">Conformance with the standard must be recorded every {{ standard.validityPeriod }} month{% if standard.validityPeriod !== 1 %}s{% endif %} through the Service Health Check App.</p>
+                        <p class="govuk-body">Conformance with the standard must be recorded every {{ standard.validityPeriod }} month{% if standard.validityPeriod !== 1 %}s{% endif %}.</p>
                     {% endif %}
                 {% endif %}
 
@@ -323,6 +323,8 @@
         </div>
     </div>
 </div>
+
+
 
 <style>
 
