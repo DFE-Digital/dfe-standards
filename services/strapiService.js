@@ -312,10 +312,10 @@ const getStandard = async (slug) => {
                         sort: ['id:asc']
                     },
                     approvedProducts: {
-                        fields: ['id', 'title', 'vendor', 'version']  // Specify only required fields
+                        fields: ['id', 'title', 'vendor', 'version', 'useCase']  // Specify only required fields
                     },
                     toleratedProducts: {
-                        fields: ['id', 'title', 'vendor', 'version']  // Specify only required fields
+                        fields: ['id', 'title', 'vendor', 'version', 'useCase']  // Specify only required fields
                     },
                     exceptions: {
                         fields: ['id', 'title', 'details']  // Specify only required fields
