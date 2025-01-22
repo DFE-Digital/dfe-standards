@@ -3,7 +3,8 @@
 
 {% set pageName = standard.title %}
 {% set selectedNav = 'Standards' %}
-{% set pagePath = '/standard/{{standard.slug}}' %}
+{% set pagePath = '/standard/' + standard.slug %}
+{% set pageDescription = standard.summary %}
 
 {% block hero %}
     <div class="dfe-page-header dfe-page-header--with-sub-nav">
@@ -11,7 +12,7 @@
             <div class="govuk-grid-row">
                 <div class="govuk-grid-column-full">
                     <a href="/standards" class="govuk-back-link">Back</a>
-                    <h1 class="govuk-heading-xl govuk-!-margin-bottom-3 govuk-!-margin-top-5">{{ standard.title }}</h1>
+                    <h1 class="govuk-heading-xl govuk-!-margin-bottom-3 govuk-!-margin-top-0">{{ standard.title }}</h1>
 
                     <table class="govuk-table  govuk-!-margin-bottom-5">
                         <thead class="govuk-table__head">
@@ -82,7 +83,7 @@
                                 <a href="#exceptions" class="govuk-link" data-target="exceptions">Exceptions</a>
                             </li>
                         {% endif %}
-                           <li class="govuk-link-list__item">
+                        <li class="govuk-link-list__item">
                             <a href="#validityPeriod" class="govuk-link" data-target="owners">Declaring conformance</a>
                         </li>
                         <li class="govuk-link-list__item">
@@ -157,14 +158,116 @@
                 {% if standard.approvedProducts | length%}
 
                     <h2 id="approvedproducts" class="govuk-heading-l">Approved products</h2>
-                    <p class="govuk-body">{{standard.approvedProducts}}</p>
+
+                    {% for product in standard.approvedProducts %}
+
+                        <div class="govuk-summary-card">
+                            <div class="govuk-summary-card__title-wrapper">
+                                <h2 class="govuk-summary-card__title">
+                                    {{ product.title}}
+                                </h2>
+                            </div>
+                            <div class="govuk-summary-card__content">
+                                <div class="govuk-summary-list">
+
+                                    <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
+                                        <dt class="govuk-summary-list__key">
+                                Vendor
+                            </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            {{ product.vendor}}
+                                        </dd>
+                                    </div>
+                                    <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
+                                        <dt class="govuk-summary-list__key">
+                                Version
+                            </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            {{ product.version}}
+                                        </dd>
+                                    </div>
+                                    <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
+                                        <dt class="govuk-summary-list__key">
+                                Use-case
+                            </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            {{ product.useCase}}
+                                        </dd>
+                                    </div>
+                                    {% if product.externalLink.length %}
+                                        <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
+                                            <dt class="govuk-summary-list__key">
+                                More information
+                            </dt>
+                                            <dd class="govuk-summary-list__value">
+                                                <a href="{{ product.externalLink}}" target="_blank">Visit provider<span class="govuk-visually-hidden"> website for {{ product.title}} (Opens in a new tab)</a>
+                                                </a>
+                                            </dd>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endfor %}
 
                 {% endif %}
 
                 {% if standard.toleratedProducts | length%}
 
                     <h2 id="toleratedproducts" class="govuk-heading-l">Tolerated products</h2>
-                    <p class="govuk-body">{{standard.toleratedProducts}}</p>
+                    {% for product in standard.toleratedProducts %}
+
+                        <div class="govuk-summary-card">
+                            <div class="govuk-summary-card__title-wrapper">
+                                <h2 class="govuk-summary-card__title">
+                                    {{ product.title}}
+                                </h2>
+                            </div>
+                            <div class="govuk-summary-card__content">
+                                <div class="govuk-summary-list">
+
+                                    <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
+                                        <dt class="govuk-summary-list__key">
+                                Vendor
+                            </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            {{ product.vendor}}
+                                        </dd>
+                                    </div>
+                                    <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
+                                        <dt class="govuk-summary-list__key">
+                                Version
+                            </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            {{ product.version}}
+                                        </dd>
+                                    </div>
+                                    <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
+                                        <dt class="govuk-summary-list__key">
+                                Use-case
+                            </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            {{ product.useCase}}
+                                        </dd>
+                                    </div>
+
+                                    {% if product.externalLink.length %}
+                                        <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
+                                            <dt class="govuk-summary-list__key">
+                                More information
+                            </dt>
+                                            <dd class="govuk-summary-list__value">
+                                                <a href="{{ product.externalLink}}" target="_blank">Visit provider<span class="govuk-visually-hidden"> website for {{ product.title}} (Opens in a new tab)</a>
+                                                </a>
+                                            </dd>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endfor %}
                 {% endif %}
 
                 {% if standard.exceptions | length%}
@@ -176,9 +279,9 @@
 
                     <h2 id="validityPeriod" class="govuk-heading-l">Declaring conformance with this standard</h2>
                     {% if standard.validityPeriod === 0 %}
-                        <p class="govuk-body">Conformance with the standard is a one time action through the Service Health Check App.</p>
+                        <p class="govuk-body">Conformance with the standard is a one time action.</p>
                     {% else %}
-                        <p class="govuk-body">Conformance with the standard must be recorded every {{ standard.validityPeriod }} month{% if standard.validityPeriod !== 1 %}s{% endif %} through the Service Health Check App.</p>
+                        <p class="govuk-body">Conformance with the standard must be recorded every {{ standard.validityPeriod }} month{% if standard.validityPeriod !== 1 %}s{% endif %}.</p>
                     {% endif %}
                 {% endif %}
 
@@ -220,6 +323,8 @@
         </div>
     </div>
 </div>
+
+
 
 <style>
 

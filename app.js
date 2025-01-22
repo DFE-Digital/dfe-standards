@@ -9,6 +9,9 @@ const appRoutes = require('./app/routes.js');
 var markdown = require('nunjucks-markdown')
 var dateFilter = require('nunjucks-date-filter')
 var marked = require('marked')
+const airtable = require('airtable');
+const bodyParser = require('body-parser');
+const base = new airtable({ apiKey: process.env.airtableFeedbackKey }).base(process.env.airtableFeedbackBase);
 require('dotenv').config();
 
 const app = express();
@@ -32,6 +35,11 @@ var nunjuckEnv = nunjucks.configure([
     extension: 'html',
     noCache: false
 });
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+
 
 nunjuckEnv.addFilter('date', dateFilter)
 markdown.register(nunjuckEnv, marked.parse)
@@ -70,6 +78,53 @@ app.get(/\.html?$/i, function (req, res) {
     urlPath = parts.join('.');
     res.redirect(urlPath);
 });
+
+// Route for handling Yes/No feedback submissions
+app.post('/form-response/helpful', (req, res) => {
+    const { response } = req.body;
+    const pageURL = req.headers.referer || 'Unknown';
+    const date = new Date().toISOString();
+
+    base('Data').create([
+        {
+            "fields": {
+                "Response": response,
+                "Service": 'Find and apply standards',
+                "URL": pageURL
+            }
+        }
+    ], function (err) {
+        if (err) {
+            console.error(err);
+            return res.status(500).send('Error saving to Airtable');
+        }
+        res.json({ success: true, message: 'Feedback submitted successfully' });
+    });
+});
+
+// New route for handling detailed feedback submissions
+app.post('/form-response/feedback', (req, res) => {
+    const { response } = req.body;
+
+    // Example service name
+    const pageURL = req.headers.referer || 'Unknown'; // Attempt to capture the referrer URL
+    const date = new Date().toISOString();
+
+    base('Feedback').create([{
+        "fields": {
+            "Feedback": response,
+            "Service": 'Find and apply standards',
+            "URL": pageURL
+        }
+    }], function (err) {
+        if (err) {
+            console.error(err);
+            return res.status(500).send('Error saving to Airtable');
+        }
+        res.json({ success: true, message: 'Feedback submitted successfully' });
+    });
+});
+
 
 // Dynamic Route Matching for URLs without extensions
 app.get(/^([^.]+)$/, function (req, res, next) {
@@ -124,7 +179,7 @@ function matchRoutes(req, res, next) {
 
 // 404 Error Handler
 app.use((req, res, next) => {
-    res.status(404).render('404', { title: 'Page Not Found' });
+    res.status(404).render('error', { title: 'Page Not Found' });
 });
 
 // General Error Handler

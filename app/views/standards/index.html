@@ -23,9 +23,9 @@
 
     <section class="govuk-!-margin-bottom-0">
         <div class="govuk-width-container">
-        
+
             <div class="govuk-grid-row">
-                <div class="govuk-grid-column-one-quarter">
+                <div class="govuk-grid-column-one-third">
                     <div class="govuk-summary-card">
                         <div class="govuk-summary-card__title-wrapper">
                             <h3 class="govuk-summary-card__title">Filters</h3>
@@ -37,7 +37,6 @@
                         </div>
                         <div class="govuk-summary-card__content">
 
-           
                             <div class="govuk-form-group">
                                 <label id="filterTableLabel" for="filterTable" class="govuk-label govuk-!-font-weight-bold">Keywords</label>
                                 <input type="text" id="filterTable" class="govuk-input" aria-describedby="filterTableLabel" />
@@ -68,217 +67,321 @@
                     </div>
 
                 </div>
-                <div class="govuk-grid-column-three-quarters">
+                <div class="govuk-grid-column-two-thirds">
 
- <h1 class="govuk-heading-l">All published standards</h1>
-                 <p id="count"></p>
+                    <h1 class="govuk-heading-l">All published standards</h1>
+                    <p id="count"></p>
 
-            
-            {% if standards | length %}
-                <table id="standardsTable" class="govuk-table">
+                    {% if standards | length %}
 
-                    <thead class="govuk-table__head">
-                        <tr class="govuk-table__row">
-                            <th scope="col" class="govuk-table__header govuk-!-width-one-half">Standard</th>
-                            <th scope="col" class="govuk-table__header">Number</th>
-                            <th scope="col" class="govuk-table__header govuk-!-width-one-quarter">Categories</th>
-                        </tr>
-                    </thead>
-                    <tbody class="govuk-table__body">
-                        {% for standard in standards %}
-                            <tr class="govuk-table__row" data-category="{% for category in standard.categories %}{{ category.slug }}{% if not loop.last %},{% endif %}{% endfor %}">
-                                <td class="govuk-table__cell">
-                                    <a href="/standard/{{ standard.slug }}" class="govuk-link govuk-link--no-visited-state">
-                                        {{ standard.title or "New" }}
-                                    </a>
-                                </td>
-                                <td class="govuk-table__cell">DDTS-{{ standard.standardId }}</td>
-                                <td class="govuk-table__cell">
-                                    <ul class="govuk-list govuk-!-margin-bottom-0">
+                        <style>
+                            .search-results {
+                                margin: 20px auto;
+
+                            }
+                            .search-results__item {
+                                border-top: 1px solid #b1b4b6;
+                                padding-bottom: 15px;
+                            }
+
+                            .search-results__header {
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                gap: 1rem;
+                            }
+
+                            .search-results__title {
+                                font-size: 1.2rem;
+                                font-weight: bold;
+                                flex: 1;
+                                /* Allows title to take available space */
+                            }
+
+                            .search-results__standard-id {
+                                font-size: 1rem;
+                                white-space: nowrap;
+                                /* Prevents breaking to a new line */
+                            }
+
+                            .search-results__categories {
+                                font-size: 1rem;
+                                color: #6f777b;
+                            }
+
+                            .govuk-tag--grey {
+                                color: #282d30 !important;
+                                background-color: #e5e6e7;
+                                color: #fff;
+                                padding: 5px 10px;
+                                margin-top: -10px;
+                                font-weight: bold;
+                            }
+                            .search-results__item:last-child {
+                                border-bottom: none;
+                            }
+                            .search-results__title {
+                                font-size: 20px;
+                                font-weight: bold;
+                                margin: 0;
+                            }
+                            .search-results__title a {
+                                color: #1d70b8;
+                                text-decoration: none;
+                            }
+                            .search-results__title a:hover {
+                                text-decoration: underline;
+                            }
+                            .search-results__meta {
+                                font-size: 1rem;
+                                color: #505a5f;
+                            }
+                            .search-results__categories {
+                                font-size: 1rem;
+                                color: #6f777b;
+                                margin-top: 5px;
+                            }
+                            .search-results__categories-tag {
+                                font-size: 1rem;
+                            }
+                        </style>
+                        <div id="standardsTable" class="search-results">
+                            {% for standard in standards %}
+                                <div class="search-results__item govuk-!-padding-bottom-3" 
+         data-category="{% for category in standard.categories %}{{ category.slug }}{% if not loop.last %},{% endif %}{% endfor %}">
+
+                                    <div class="search-results__header">
+                                        <p class="search-results__title govuk-!-margin-bottom-0  govuk-!-margin-top-2">
+                                            <a href="/standard/{{ standard.slug }}" class="govuk-link govuk-link--no-visited-state">
+                                                {{ standard.title or "New" }}
+                                            </a>
+                                        </p>
+                                        <span class="govuk-tag govuk-tag--grey search-results__standard-id">
+                DDTS-{{standard.standardId}}
+                                        </span>
+                                    </div>
+
+                                    <p class="search-results__categories govuk-!-margin-top-1 govuk-!-margin-bottom-0">
                                         {% for category in standard.categories %}
-                                            <li>{{ category.title }}</li>
+                                            {{ category.title }}
+                                            {% if not loop.last %}, {% endif %}
                                         {% endfor %}
-                                    </ul>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                                    </p>
+                                </div>
+                            {% endfor %}
 
-             
+                            <nav class="govuk-pagination govuk-!-margin-top-5" aria-label="Pagination" id="paginationControls">
+                                <div class="govuk-pagination__prev">
+                                    <a class="govuk-link govuk-pagination__link" href="#" id="prevPage" rel="prev">
+                                        <svg class="govuk-pagination__icon govuk-pagination__icon--prev" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
+                                            <path d="m6.5938-0.0078125-6.7266 6.7266 6.7441 6.4062 1.377-1.449-4.1856-3.9768h12.896v-2h-12.984l4.2931-4.293-1.414-1.414z"></path>
+                                        </svg>
+                                        <span class="govuk-pagination__link-title">
+        Previous<span class="govuk-visually-hidden"> page</span>
+                                        </span>
+                                    </a>
+                                </div>
+                                <ul class="govuk-pagination__list" id="paginationPages">
 
-                {% if standards | length > 10 %}
-
-                <nav class="govuk-pagination" aria-label="Pagination">
-                
-                    <ul class="govuk-pagination__list">
-                        <li class="govuk-pagination__item  govuk-pagination__item--current">
-                            <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 1">
-        1
-      </a>
-                        </li>
-                        <li class="govuk-pagination__item">
-                            <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 2" aria-current="page">
-        2
-      </a>
-                        </li>
-                        <li class="govuk-pagination__item">
-                            <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 3">
-        3
-      </a>
-                        </li>
-                    </ul>
-                    <div class="govuk-pagination__next">
-                        <a class="govuk-link govuk-pagination__link" href="#" rel="next">
-                            <span class="govuk-pagination__link-title">
+                                    <!-- Pages will be dynamically inserted here -->
+                                </ul>
+                                <div class="govuk-pagination__next">
+                                    <a class="govuk-link govuk-pagination__link" href="#" id="nextPage" rel="next">
+                                        <span class="govuk-pagination__link-title">
         Next<span class="govuk-visually-hidden"> page</span>
-                            </span>
-                            <svg class="govuk-pagination__icon govuk-pagination__icon--next" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
-                                <path d="m8.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7266z"></path>
-                            </svg>
-                        </a>
-                    </div>
-                </nav>
+                                        </span>
+                                        <svg class="govuk-pagination__icon govuk-pagination__icon--next" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
+                                            <path d="m8.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7266z"></path>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </nav>
 
-                {% endif %}
+                        </div>
 
-                <div id="noResultsMessage" style="display: none;">
-                 
-                    <p>There are no results for the selected filter.</p>
-                </div>
-            {% else %}
-         
-            {% endif %}
+                        <div id="noResultsMessage" style="display: none;">
+
+                            <p>There are no results for the selected filter.</p>
+                        </div>
+                    {% else %}
+
+                    {% endif %}
                 </div>
             </div>
         </div>
     </section>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const filterInput = document.getElementById("filterTable");
+            const checkboxes = document.querySelectorAll("input[name='category']");
+            const applyFiltersButton = document.getElementById("applyFilters");
+            const table = document.getElementById("standardsTable");
+            const noResultsMessage = document.getElementById("noResultsMessage");
+            const tableItems = Array.from(document.querySelectorAll(".search-results__item"));
+            const paginationPages = document.getElementById("paginationPages");
+            const prevPageBtn = document.getElementById("prevPage");
+            const nextPageBtn = document.getElementById("nextPage");
+            const countElement = document.getElementById("count");
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    const filterInput = document.getElementById("filterTable");
-    const checkboxes = document.querySelectorAll("input[name='category']");
-    const applyFiltersButton = document.getElementById("applyFilters");
-    const table = document.getElementById("standardsTable");
-    const noResultsMessage = document.getElementById("noResultsMessage");
-    const tableRows = document.querySelectorAll(".govuk-table__body .govuk-table__row");
-    const count = document.getElementById("count");
-    const header = document.querySelector("h1.govuk-heading-l");
+            let itemsPerPage = 10;
+            let currentPage = 1;
+            let filteredItems = [];
 
-    const selectedFiltersContainer = document.createElement("p");
-    selectedFiltersContainer.id = "selectedFilters";
-    selectedFiltersContainer.className = "govuk-body";
-    selectedFiltersContainer.style.marginTop = "1em";
-    table.parentNode.insertBefore(selectedFiltersContainer, table);
+            function updateCount() {
+                const searchTerm = filterInput
+                    .value
+                    .trim();
+                const selectedCategories = Array
+                    .from(checkboxes)
+                    .filter(cb => cb.checked)
+                    .map(cb => cb.nextElementSibling.textContent.trim());
 
-    // Function to display selected filters
-    function displaySelectedFilters() {
-        const selectedCheckboxes = Array.from(checkboxes).filter(cb => cb.checked);
-        const filterLabels = selectedCheckboxes.map(cb => cb.nextElementSibling.textContent.trim());
+                let countText = `${filteredItems.length} result${filteredItems.length === 1
+                    ? ""
+                    : "s"} found`;
 
-        const searchTerm = filterInput.value.trim();
-        let filtersText = "";
+                if (searchTerm || selectedCategories.length) {
+                    let filtersText = "";
 
-        if (searchTerm) {
-            filtersText += `Keywords: "<strong>${searchTerm}</strong>"`;
-        }
-        if (filterLabels.length > 0) {
-            if (filtersText) filtersText += " | "; // Separate with a pipe
-            filtersText += `Categories: <strong>${filterLabels.join(", ")}</strong>`;
-        }
+                    if (searchTerm) {
+                        filtersText += ` Keywords: "<strong>${searchTerm}</strong>"`;
+                    }
 
-        if (filtersText) {
-            selectedFiltersContainer.innerHTML = `Active filters: ${filtersText}`;
-            selectedFiltersContainer.style.display = "block";
-        } else {
-            selectedFiltersContainer.style.display = "none";
-        }
-    }
+                    if (selectedCategories.length) {
+                        filtersText += ` Categories: <strong>${selectedCategories.join(", ")}</strong>`;
+                    }
 
-    // Function to update header text
-    function updateHeader(visibleRowCount) {
-        const hasFilters = filterInput.value.trim() !== "" || Array.from(checkboxes).some(cb => cb.checked);
+                    countText += ` | Active filters: ${filtersText}`;
+                }
 
-        if (hasFilters) {
-            header.textContent = `${visibleRowCount} result${visibleRowCount === 1 ? "" : "s"}`;
-        } else {
-            header.textContent = "All published standards";
-        }
-    }
-
-    // Function to apply filters
-    function applyFilters() {
-        const searchTerm = filterInput.value.toLowerCase().trim();
-        const selectedCategories = Array.from(checkboxes)
-            .filter(checkbox => checkbox.checked)
-            .map(checkbox => checkbox.value);
-
-        let visibleRowCount = 0;
-
-        tableRows.forEach(row => {
-            const rowCategoriesAttr = row.getAttribute("data-category");
-            const rowCategories = rowCategoriesAttr ? rowCategoriesAttr.split(",") : [];
-
-            const cellText = Array.from(row.querySelectorAll("td"))
-                .map(cell => cell.textContent.toLowerCase())
-                .join(" ");
-
-            const matchesKeyword = searchTerm === "" || cellText.includes(searchTerm);
-            const matchesCategory = selectedCategories.length === 0 || selectedCategories.some(category => rowCategories.includes(category));
-
-            if (matchesKeyword && matchesCategory) {
-                row.style.display = "";
-                visibleRowCount++;
-            } else {
-                row.style.display = "none";
+                countElement.innerHTML = countText;
             }
+
+            function updatePagination() {
+                paginationPages.innerHTML = '';
+                const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
+
+                for (let i = 1; i <= totalPages; i++) {
+                    let pageItem = document.createElement("li");
+                    pageItem.className = `govuk-pagination__item ${i === currentPage
+                        ? 'govuk-pagination__item--current'
+                        : ''}`;
+                    pageItem.innerHTML = `
+                    <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page ${i}" data-page="${i}">
+                        ${i}
+                    </a>
+                `;
+                    paginationPages.appendChild(pageItem);
+                }
+
+                prevPageBtn.parentElement.style.display = currentPage === 1
+                    ? "none"
+                    : "block";
+                nextPageBtn.parentElement.style.display = currentPage === totalPages || totalPages === 0
+                    ? "none"
+                    : "block";
+            }
+
+            function showPage(page) {
+                const start = (page - 1) * itemsPerPage;
+                const end = start + itemsPerPage;
+
+                tableItems.forEach(item => {
+                    item.style.display = "none";
+                });
+
+                filteredItems
+                    .slice(start, end)
+                    .forEach(item => {
+                        item.style.display = "block";
+                    });
+
+                currentPage = page;
+                updatePagination();
+                updateCount();
+            }
+
+            function applyFilters() {
+                const searchTerm = filterInput
+                    .value
+                    .toLowerCase()
+                    .trim();
+                const selectedCategories = Array
+                    .from(checkboxes)
+                    .filter(checkbox => checkbox.checked)
+                    .map(checkbox => checkbox.value);
+
+                filteredItems = tableItems.filter(item => {
+                    const itemCategories = item
+                        .getAttribute("data-category")
+                        .split(",");
+                    const itemText = item
+                        .textContent
+                        .toLowerCase();
+
+                    const matchesKeyword = searchTerm === "" || itemText.includes(searchTerm);
+                    const matchesCategory = selectedCategories.length === 0 || selectedCategories.some(category => itemCategories.includes(category));
+
+                    return matchesKeyword && matchesCategory;
+                });
+
+                if (filteredItems.length > 0) {
+                    table.style.display = "block";
+                    noResultsMessage.style.display = "none";
+                } else {
+                    table.style.display = "none";
+                    noResultsMessage.style.display = "block";
+                }
+
+                currentPage = 1; // Reset to first page on filter
+                showPage(currentPage);
+            }
+
+            // Pagination button event handlers
+            prevPageBtn.addEventListener("click", function (event) {
+                event.preventDefault();
+                if (currentPage > 1) {
+                    showPage(currentPage - 1);
+                }
+            });
+
+            nextPageBtn.addEventListener("click", function (event) {
+                event.preventDefault();
+                if (currentPage < Math.ceil(filteredItems.length / itemsPerPage)) {
+                    showPage(currentPage + 1);
+                }
+            });
+
+            paginationPages.addEventListener("click", function (e) {
+                if (e.target.tagName === "A") {
+                    e.preventDefault();
+                    const newPage = parseInt(e.target.getAttribute("data-page"));
+                    showPage(newPage);
+                }
+            });
+
+            // Debounce function for search input
+            function debounce(func, delay) {
+                let timer;
+                return function (...args) {
+                    clearTimeout(timer);
+                    timer = setTimeout(() => func.apply(this, args), delay);
+                };
+            }
+
+            const debouncedFilter = debounce(applyFilters, 300);
+
+            filterInput.addEventListener("input", debouncedFilter);
+            checkboxes.forEach(checkbox => checkbox.addEventListener("change", applyFilters));
+            applyFiltersButton.addEventListener("click", function (event) {
+                event.preventDefault();
+                applyFilters();
+            });
+
+            // Initial display
+            applyFilters();
         });
-
-        // Toggle visibility
-        if (visibleRowCount > 0) {
-            table.style.display = "";
-            noResultsMessage.style.display = "none";
-        } else {
-            table.style.display = "none";
-            noResultsMessage.style.display = "block";
-        }
-
-        // Update count, selected filters, and header
-        
-        displaySelectedFilters();
-        updateHeader(visibleRowCount);
-    }
-
-    // Debounce function to limit filter calls
-    function debounce(func, delay) {
-        let timer;
-        return function (...args) {
-            clearTimeout(timer);
-            timer = setTimeout(() => func.apply(this, args), delay);
-        };
-    }
-
-    // Event listeners
-    const debouncedFilter = debounce(applyFilters, 300);
-
-    filterInput.addEventListener("input", debouncedFilter);
-    checkboxes.forEach(checkbox => checkbox.addEventListener("change", applyFilters));
-
-    applyFiltersButton.addEventListener("click", function (event) {
-        event.preventDefault();
-        applyFilters();
-    });
-
-    // Initial display
-    applyFilters();
-});
-</script>
-
-
-
-
-
-
+    </script>
 
 {% endblock %}

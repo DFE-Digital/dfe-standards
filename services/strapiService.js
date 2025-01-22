@@ -81,7 +81,7 @@ const getStandardsForList = async () => {
         const response = await strapiClient.get('/api/standards', {
             params: {
                 sort: 'title',
-                fields: 'id,title,slug,standardId',
+                fields: 'id,title,slug,standardId,summary',
                 populate: '*',
             },
         });
@@ -286,24 +286,44 @@ const getStandard = async (slug) => {
                 'filters[slug][$eq]': slug,
                 'populate': {
                     categories: {
-                        populate: '*' // Fetch all data within categories
+                        fields: ['id', 'documentId', 'title', 'description', 'slug'], // Specify only needed fields
+                        populate: {
+                            sub_categories: {
+                                fields: ['id', 'title', 'slug']  // Only include required sub_category fields
+                            }
+                        }
                     },
                     sub_categories: {
-                        populate: 'category' // Populate the category field in sub_categories
+                        fields: ['id', 'title', 'slug'], // Include only necessary fields
+                        populate: {
+                            category: {
+                                fields: ['id', 'title', 'slug']  // Only include required sub_category fields
+                            }
+                        }
                     },
                     owners: {
-                        populate: '*' // Populate the nested permissions.user relationship
+                        fields: ['firstName', 'lastName', 'email', 'JobRole'] // Only include needed fields
                     },
                     contacts: {
-                        populate: '*' // Populate the nested permissions.user relationship
+                        fields: ['firstName', 'lastName', 'email','JobRole'] // Only include needed fields
                     },
                     phases: {
-                        populate: '*', // Populate the nested phases relationship
+                        fields: ['id', 'Title', 'Enabled'], // Include necessary phase fields
                         sort: ['id:asc']
-                    }
+                    },
+                    approvedProducts: {
+                        fields: ['id', 'title', 'vendor', 'version', 'useCase']  // Specify only required fields
+                    },
+                    toleratedProducts: {
+                        fields: ['id', 'title', 'vendor', 'version', 'useCase']  // Specify only required fields
+                    },
+                    exceptions: {
+                        fields: ['id', 'title', 'details']  // Specify only required fields
+                    },
                 }
             }
         });
+
 
 
 
@@ -319,6 +339,7 @@ const getStandard = async (slug) => {
 
         return standard;
     } catch (error) {
+        console.log(error.response.data)
         logger.error(`Error fetching standard with slug "${slug}" from Strapi: ${error.message}`);
         throw error; // Propagate the error to the controller or higher-level handler
     }
