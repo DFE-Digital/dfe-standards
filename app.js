@@ -76,6 +76,12 @@ app.get(/^([^.]+)$/, function (req, res, next) {
     matchRoutes(req, res, next);
 });
 
+// Render sitemap.xml in XML format
+app.get('/sitemap.xml', (_, res) => {
+    res.set({ 'Content-Type': 'application/xml' })
+    res.render('sitemap.xml')
+})
+
 // Function to render paths
 function renderPath(path, res, next) {
     // Try to render the path
