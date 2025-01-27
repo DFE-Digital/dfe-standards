@@ -26,8 +26,8 @@ Ensure you have the following installed:
 ### 1. Clone the Repository
 
 ```sh
-git clone https://github.com/DFE-Digital/find-and-use-a-standard.git
-cd find-and-use-a-standard
+git clone https://github.com/DFE-Digital/dfe-standards.git
+cd dfe-standards
 ```
 
 ### 2. Install Dependencies
@@ -64,11 +64,8 @@ CREATE_MANAGE_URL=http://localhost:3085
 
 > **Note:** The `STRAPI_API_URL` and `STRAPI_API_KEY` should be set appropriately for staging and production environments.
 
-### 4. Database Setup
 
-Ensure you have a PostgreSQL database running and update the connection details in the app configuration.
-
-### 5. Run the Application
+### 4. Run the Application
 
 ```sh
 npm run dev
