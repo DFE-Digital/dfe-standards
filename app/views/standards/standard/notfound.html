@@ -1,0 +1,55 @@
+<!-- app/views/index.html -->
+{% extends "layouts/layout.html" %}
+
+{% set pageName = standard.title %}
+{% set selectedNav = 'Standards' %}
+{% set pagePath = '/standard/' + standard.slug %}
+{% set pageDescription = standard.summary %}
+
+
+
+{% block content %}
+
+<section class="govuk-!-margin-bottom-0">
+    <div class="govuk-width-container">
+
+        <div class="govuk-grid-row">
+          
+            <div class="govuk-grid-column-three-quarters">
+
+                 <a href="/standards" class="govuk-back-link">Back</a>
+
+                <h1 class="govuk-heading-xl">Standard not available</h1>
+
+                <p class="govuk-body">The standard you are looking for is not available. It may have been unpublished or archived.</p>
+
+                <p class="govuk-body">Contact the <a href="/support">DDT Standards forum</a> if you beleive this to be incorrect.</p>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<style>
+
+    @media (min-width: 768px) {
+        /* Apply sticky for larger screens */
+        .sticky {
+            position: sticky;
+            top: 20px;
+            z-index: 10;
+        }
+    }
+
+    @media (max-width: 767px) {
+        /* For smaller devices, default behavior */
+        .sticky {
+            position: relative;
+        }
+    }
+</style>
+{% endblock %}

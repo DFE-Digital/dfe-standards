@@ -155,7 +155,7 @@ exports.g_standard = async (req, res, next) => {
 
         if (!standard || standard.length === 0) {
             logger.info('No standard found');
-            return res.render('standards/standard/index', {
+            return res.render('standards/standard/notfound', {
                 standard: []
             });
         }
