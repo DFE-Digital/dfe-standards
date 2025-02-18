@@ -169,3 +169,58 @@ exports.g_standard = async (req, res, next) => {
         });
     }
 };
+
+
+/**
+ * Handler to get and render proposed standards
+ * @param {express.Request} req 
+ * @param {express.Response} res 
+ * @param {express.NextFunction} next 
+ */
+exports.g_proposedstandards = async (req, res, next) => {
+    try {
+        const proposedStandards = await strapiService.getProposedStandards(true);
+
+    
+
+        res.render('proposed/index', { proposedStandards });
+    } catch (error) {
+        logger.error('Error fetching proposed standards:', error);
+        res.status(500).render('error', {
+            title: 'Error',
+            message: 'Failed to load proposed standards. Please try again later.'
+        });
+    }
+}
+
+
+/**
+ * Handler to get and render a given proposed standard
+ * @param {express.Request} req 
+ * @param {express.Response} res 
+ * @param {express.NextFunction} next 
+ */
+exports.g_proposedstandard = async (req, res, next) => {
+    try {
+        const {documentId} = req.params;
+
+        const proposedStandard = await strapiService.getStandardByDocumentId(req.params.documentId);
+
+        if (!proposedStandard || proposedStandard.length === 0) {
+            logger.info('No proposed standard found');
+            return res.render('proposed/notfound', {
+                proposedStandard: []
+            });
+        }
+
+        console.log(proposedStandard);
+
+        res.render('proposed/standard/index', { standard: proposedStandard });
+    } catch (error) {
+        logger.error('Error fetching proposed standard:', error);
+        res.status(500).render('error', {
+            title: 'Error',
+            message: 'Failed to load proposed standard. Please try again later.'
+        });
+    }
+}

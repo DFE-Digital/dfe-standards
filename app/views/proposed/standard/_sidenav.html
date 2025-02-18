@@ -1,0 +1,18 @@
+
+<nav class="dfe-vertical-nav">
+
+    <ul class="dfe-vertical-nav__section">
+
+        <li class="dfe-vertical-nav__section-item {% if sidenav === 'standard' %}dfe-vertical-nav__section-item--current{% endif %}">
+            <a class="dfe-vertical-nav__link" href="/admin/standard/{{standard.slug}}">Standard</a>
+        </li>
+      
+        <li class="dfe-vertical-nav__section-item  {% if sidenav === 'history' %}dfe-vertical-nav__section-item--current{% endif %}">
+            <a class="dfe-vertical-nav__link" href="/admin/standard/{{standard.slug}}/history">History</a>
+        </li>
+        <li class="dfe-vertical-nav__section-item  {% if sidenav === 'categories' %}dfe-vertical-nav__section-item--current{% endif %}">
+            <a class="dfe-vertical-nav__link" href="/admin/standard/{{standard.slug}}/comments">Comments</a>
+        </li>
+       
+    </ul>
+</nav>

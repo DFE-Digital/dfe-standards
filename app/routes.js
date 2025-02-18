@@ -14,6 +14,10 @@ router.get('/standards', standardsController.g_standards);
 router.get('/standards/export', standardsController.g_standards_export);
 router.get('/standard/:slug', standardsController.g_standard);
 
+// Proposed Standards routes
+router.get('/proposed', standardsController.g_proposedstandards);
+router.get('/proposed/standard/:documentId', standardsController.g_proposedstandard);
+
 // Standards routes
 router.get('/categories', categoriesController.g_categories);
 

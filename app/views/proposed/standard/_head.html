@@ -1,0 +1,51 @@
+<div class="dfe-page-header dfe-page-header--with-sub-nav">
+    <div class="govuk-width-container dfe-width-container ">
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-full">
+
+                <span class="govuk-caption-xl govuk-!-padding-top-5">Admin</span>
+                <h1 class="govuk-heading-xl govuk-!-padding-bottom-0">{{pageName}}</h1>
+
+                <table class="govuk-table  govuk-!-margin-bottom-5">
+                    <thead class="govuk-table__head">
+                        <tr class="govuk-table__row">
+                            <th class="govuk-table__header" scope="col">Reference</th>
+                            <th class="govuk-table__header" scope="col">Stage</th>
+                            <th class="govuk-table__header" scope="col">Version</th>
+                            <th class="govuk-table__header" scope="col">Published</th>
+                            <th class="govuk-table__header" scope="col">Updated</th>
+                            <th class="govuk-table__header" scope="col">View</th>
+                        </tr>
+                    </thead>
+                    <tbody class="govuk-table__body">
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__cell">DDTS-{{standard.standardId}}</td>
+                            <td class="govuk-table__cell">
+                                {% if standard.stage.title === 'Draft' %}
+                                    <strong class="govuk-tag govuk-tag--yellow">{{standard.stage.title}}</strong>
+                                {% elseif standard.stage.title === 'Approval' %}
+                                    <strong class="govuk-tag govuk-tag--orange">{{standard.stage.title}}</strong>
+                                {% elseif standard.stage.title === 'Approved' %}
+                                    <strong class="govuk-tag govuk-tag--green">{{standard.stage.title}}</strong>
+                                {% elseif standard.stage.title === 'Rejected' %}
+                                    <strong class="govuk-tag govuk-tag--red">{{standard.stage.title}}</strong>
+                                {% elseif standard.stage.title === 'Published' %}
+                                    <strong class="govuk-tag govuk-tag--blue">{{standard.stage.title}}</strong>
+                                {% elseif standard.stage.title === 'Archived' %}
+                                    <strong class="govuk-tag govuk-tag--grey">{{standard.stage.title}}</strong>
+                                {% endif %}
+                            </td>
+                            <td class="govuk-table__cell">v.{{standard.version}}</td>
+                            <td class="govuk-table__cell">{{standard.firstPublished | date('D MMM YYYY')}}</td>
+                            <td class="govuk-table__cell">{{standard.lastUpdated | date('D MMM YYYY')}}</td>
+                            <td class="govuk-table__cell">
+                                <a href="https://standards.education.gov.uk/standard/{{standard.standardId}}">View standard</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

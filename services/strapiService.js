@@ -345,7 +345,91 @@ const getStandard = async (slug) => {
     }
 }
 
+/**
+ * Fetches proposed standards from Strapi.
+ * @returns {Promise<Array<Object>>} A promise that resolves to an array of proposed standards.
+ */
+const getProposedStandards = async (includeDraft = false) => {
+
+    try {
+
+        let response = []
+        if (includeDraft) {
+
+            // get ones in Draft 
+
+            response = await strapiClient.get(`/api/standards?status=draft`, {
+                params: {
+                    populate: '*',
+                    'filters[stage][title][$in]': ['Draft', 'Approval'],
+                    sort: 'title',
+                },
+            });
+
+        } else {
+            response = await strapiClient.get(`/api/standards`, {
+                params: {
+                    populate: '*',
+                    'filters[stage][title][$eq]': 'Published',
+                    sort: 'title',
+                },
+            });
+        }
+
+        // Validate response structure
+        if (!response || !response.data) {
+            throw new Error("Unexpected response format from Strapi API.");
+        }
+
+        // Ensure data is an array or handle empty results
+        return response.data.data;
+    }
+    catch (error) {
+        // Log the error with additional context
+        console.error(`Failed to fetch standards`, error.message);
+
+        // Rethrow the error with a meaningful message
+        throw new Error(`Error fetching standards: ${error.message}`);
+    }
+}
+
+const getStandardByDocumentId = async (documentId) => {
+
+    try {
+        const response = await strapiClient.get(`/api/standards?status=draft`, {
+            params: {
+                'filters[documentId][$eq]': documentId,
+                populate: {
+                    categories: true,
+                    owners: true,
+                    contacts: true,
+                    approvedProducts: true,
+                    toleratedProducts: true,
+                    exceptions: true,
+                    standard_comments: true,
+                    creator: true,
+                    stage: true,
+                    sub_categories: {
+                        populate: {
+                            category: true, // Deep population for sub_categories -> category
+                        },
+                    },
+                },
+            },
+        });
+
+        // Return the standard data
+        return response.data.data[0]; // Assuming slug is unique and returning the first match
+    } catch (error) {
+        // Log the error with additional context
+        console.error(`Failed to fetch standard with id: ${documentId}`, error.message);
+
+        // Rethrow the error with a meaningful message
+        throw new Error(`Error fetching standard: ${error.message}`);
+    }
+};
+
 
 module.exports = {
-    getStandardsTitles, getCategories, getStandards, getCategoryTitles, getStandardsForList, getStandard
+    getStandardsTitles, getCategories, getStandards, getCategoryTitles, getStandardsForList, getStandard, getProposedStandards, getStandardByDocumentId
 };

@@ -1,0 +1,183 @@
+{% extends "layouts/layout.html" %}
+
+{% set pageName = standard.title %}
+{% set selectedNav = 'Admin' %}
+{% set pagePath = '/admin/standard/{{standard.slug}}' %}
+
+{% block hero %}
+    <div class="dfe-page-header dfe-page-header--with-sub-nav">
+        <div class="govuk-width-container dfe-width-container ">
+            <div class="govuk-grid-row">
+                <div class="govuk-grid-column-full">
+                    <a href="/admin/standards" class="govuk-back-link">Back</a>
+                    <h1 class="govuk-heading-xl govuk-!-margin-bottom-3 govuk-!-margin-top-5">{{ standard.title }}</h1>
+
+                    <table class="govuk-table  govuk-!-margin-bottom-5">
+                        <thead class="govuk-table__head">
+                            <tr class="govuk-table__row">
+                                <th class="govuk-table__header" scope="col">Reference</th>
+                                <th class="govuk-table__header" scope="col">Version</th>
+                                <th class="govuk-table__header" scope="col">Published</th>
+                                <th class="govuk-table__header" scope="col">Updated</th>
+                            </tr>
+                        </thead>
+                        <tbody class="govuk-table__body">
+                            <tr class="govuk-table__row">
+                                <td class="govuk-table__cell">DDTS-{{standard.standardId}}</td>
+                                <td class="govuk-table__cell">v.{{standard.version}}</td>
+                                <td class="govuk-table__cell">{{standard.firstPublished | date('D MMMM YYYY')}}</td>
+                                <td class="govuk-table__cell">{{standard.lastUpdated | date('D MMMM YYYY')}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<section class="govuk-!-margin-bottom-0">
+    <div class="govuk-width-container">
+
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-one-quarter sticky">
+
+                <h2 class="govuk-heading-m">Contents</h2>
+
+                <nav class="govuk-link-list sticky">
+                    <ul class="govuk-list govuk-list--spaced">
+                        <li class="govuk-link-list__item">
+                            <a href="#summary" class="govuk-link" data-target="summary">Summary</a>
+                        </li>
+                        <li class="govuk-link-list__item">
+                            <a href="#categories" class="govuk-link" data-target="categories">Categories</a>
+                        </li>
+                        <li class="govuk-link-list__item">
+                            <a href="#purpose" class="govuk-link" data-target="purpose">Purpose</a>
+                        </li>
+                        <li class="govuk-link-list__item">
+                            <a href="#howtommeet" class="govuk-link" data-target="howtommeet">How to meet this standard</a>
+                        </li>
+                        {% if standard.phases | length %}
+                            <li class="govuk-link-list__item">
+                                <a href="#whentommeet" class="govuk-link" data-target="whentommeet">When to meet this standard</a>
+                            </li>
+                        {% endif %}
+                        {% if standard.approvedProducts | length %}
+                            <li class="govuk-link-list__item">
+                                <a href="#approvedproducts" class="govuk-link" data-target="approvedproducts">Approved products</a>
+                            </li>
+                        {% endif %}
+                        {% if standard.toleratedProducts | length %}
+                            <li class="govuk-link-list__item">
+                                <a href="#toleratedproducts" class="govuk-link" data-target="toleratedproducts">Tolerated products</a>
+                            </li>
+                        {% endif %}
+                        {% if standard.exceptions | length %}
+                            <li class="govuk-link-list__item">
+                                <a href="#exceptions" class="govuk-link" data-target="exceptions">Exemptions</a>
+                            </li>
+                        {% endif %}
+                        <li class="govuk-link-list__item">
+                            <a href="#owners" class="govuk-link" data-target="owners">Owners and contacts</a>
+                        </li>
+                        {% if standard.relatedGuidance %}
+                            <li class="govuk-link-list__item">
+                                <a href="#relatedGuidance" class="govuk-link" data-target="relatedGuidance">Related guidance</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+
+            </div>
+            <div class="govuk-grid-column-three-quarters">
+
+                 {% if standard.fields.governanceApproval == false or standard.fields.governanceApproval is not defined %}
+
+                    <div class="govuk-notification-banner" role="region" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+                        <div class="govuk-notification-banner__header">
+                            <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
+      Important
+    </h2>
+                        </div>
+                        <div class="govuk-notification-banner__content">
+                            <p class="govuk-notification-banner__heading">
+      You cannot approve this standard as governance is not acceptable. You can 
+      <a class="govuk-notification-banner__link" href="/admin/standard/task/governance/{{standard.sys.id}}">review governance decision</a> or reject the standard and give a reason.
+    </p>
+                        </div>
+                    </div>
+
+                {% endif %}
+
+                <form action="/admin/standard/outcome" method="post">
+                    <input type="hidden" name="standard_id" value="{{standard.documentId}}">
+
+                    <h1 class="govuk-heading-l">Standard forum decision</h1>
+
+                    <p class="govuk-body">You can approve the standard if it can be:</p>
+                    <ul class="govuk-list govuk-list--bullet">
+                        <li>assured</li>
+                        <li>applied retrospectively</li>
+                        <li>governed</li>
+                    </ul>
+                    <p>Otherwise reject the standard and provide a reason why.</p>
+
+                    <div class="govuk-form-group">
+                        <fieldset class="govuk-fieldset" aria-describedby="outcome-hint">
+                            <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+
+                                <h2 class="govuk-fieldset__heading">
+        Decision
+      </h2>
+
+                            </legend>
+                            <div id="outcome-hint" class="govuk-hint">
+      Select one option
+    </div>
+                            <div class="govuk-radios" data-module="govuk-radios">
+                                <div class="govuk-radios__item">
+                                    <input class="govuk-radios__input" id="outcome" name="outcome" type="radio" value="Approve">
+                                    <label class="govuk-label govuk-radios__label" for="outcome">
+          Approve
+        </label>
+                                </div>
+
+                                <div class="govuk-radios__item">
+                                    <input class="govuk-radios__input" id="outcome-2" name="outcome" type="radio" value="Reject" data-aria-controls="conditional-outcome-2">
+                                    <label class="govuk-label govuk-radios__label" for="outcome-2">
+          Reject
+        </label>
+                                </div>
+                                <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-outcome-2">
+                                    <div class="govuk-form-group govuk-character-count" data-module="govuk-character-count" data-maxlength="1000">
+                                        <label class="govuk-label" for="reason">
+    Reason for rejection
+  </label>
+                                        <textarea class="govuk-textarea govuk-js-character-count" id="reason" name="reason" rows="5" aria-describedby="reason-info"></textarea>
+                                        <div id="reason-info" class="govuk-hint govuk-character-count__message">
+    You can enter up to 1000 characters
+  </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <div class="govuk-button-group">
+                        <button type="submit" class="govuk-button" data-module="govuk-button">Confirm outcome</button>
+                    </button>
+                    <a class="govuk-link" href="/admin/standard/{{standard.documentId}}">Cancel and return to standard</a>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}
