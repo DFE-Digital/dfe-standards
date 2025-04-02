@@ -1,24 +1,24 @@
-<!-- app/views/index.html -->
 {% extends "layouts/layout.html" %}
 {% set selectedNav = "Home" %}
 {% set pagePath = "" %}
 {% set pageName = serviceName%}
 {% set pageDescription = "Digital, data and technology standards to support good service delivery in the Department for Education." %}
+{% set mainClasses = 'govuk-!-padding-top-0' %}
 
-{% block hero %}
-    <section class="dfe-page-hero">
-        <div class="govuk-width-container">
-            <div class="govuk-grid-row">
-                <div class="govuk-grid-column-two-thirds">
-                    <h1 class="govuk-heading-xl">{{ pageName }}</h1>
-                    <p class="govuk-body-l">{{ pageDescription }}</p>
-                </div>
-            </div>
-        </div>
-    </section>
-{% endblock %}
 
 {% block content %}
+
+      <section style="background-color:#ffffff;" class="govuk-!-padding-top-9 govuk-!-padding-bottom-7">
+          <div class="govuk-width-container">
+            <div class="govuk-grid-row">
+              <div class="govuk-grid-column-three-quarters">
+                <h1 class="govuk-heading-xl govuk-!-font-size-64 govuk-!-margin-top-5" style="color: #003a69">Find and use standards</h1>
+               <p class="govuk-body-l">{{pageDescription}}</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
 
     <section class="govuk-!-margin-bottom-0">
         <div class="govuk-width-container">
