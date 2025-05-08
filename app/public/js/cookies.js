@@ -1,4 +1,4 @@
-sessionStorage.setItem('clarityID', 'driuzqz382');
+sessionStorage.setItem('clarityID', 'hqlzl6g77n');
 sessionStorage.setItem('googleID', 'G-05LXB3F7SX');
 const cID = sessionStorage.getItem('clarityID');
 const gID = sessionStorage.getItem('googleID');
