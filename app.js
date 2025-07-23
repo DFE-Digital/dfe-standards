@@ -58,6 +58,7 @@ app.locals.createURL = process.env.CREATE_MANAGE_URL;
 app.use('/govuk', express.static(path.join(__dirname, 'node_modules/govuk-frontend/govuk/assets')));
 app.use('/dfe', express.static(path.join(__dirname, 'node_modules/dfe-frontend/dist')));
 app.use('/assets', express.static('app/public'));
+app.use('/public', express.static('app/public'));
 
 // Parse URL-encoded bodies (as sent by HTML forms)
 app.use(express.urlencoded({ extended: true }));

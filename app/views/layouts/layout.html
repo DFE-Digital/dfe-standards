@@ -3,7 +3,7 @@
 {% from "govuk/components/cookie-banner/macro.njk" import govukCookieBanner %}
 
 <!DOCTYPE html>
-<html lang="en" class="govuk-template ">
+<html lang="en" class="govuk-template--rebranded">
 
     <head>
         <meta charset="utf-8">
@@ -22,7 +22,8 @@
         <link rel="stylesheet" href="/assets/css/govuk-frontend.min.css">
         <link rel="stylesheet" href="/assets/css/dfefrontend-2.0.0.min.css">
         <link rel="stylesheet" href="/assets/css/app.css">
-
+ <link rel="stylesheet" href="/assets/css/_header.css">
+    
         <meta property="og:url" content="https://standards.education.gov.uk{{pagePath}}" />
         <meta property="og:site_name" content="{{serviceName}}" />
         <meta property="og:title" content="{{pageName}}" />
@@ -97,8 +98,7 @@
         {% include 'layouts/_cookiebanner.html'%}
         <a href="#main-content" class="govuk-skip-link" data-module="govuk-skip-link">Skip to main content</a>
 
-        {% include 'layouts/_topnav.html'%}
-        {% include 'layouts/_services.html'%}
+
 
         {%- block header -%}
             {% include 'layouts/_header.html'%}
@@ -129,6 +129,7 @@
         <script src="/assets/js/app.js"></script>
         <script src="/assets/js/feedback.js"></script>
 
+        <script src="/assets/js/header.js"></script>
         <script>
             hljs.highlightAll();
         </script>

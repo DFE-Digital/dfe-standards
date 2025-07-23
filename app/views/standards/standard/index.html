@@ -287,7 +287,48 @@
 
                 {% if standard.exceptions | length%}
                     <h2 id="exceptions" class="govuk-heading-l">Exemptions</h2>
-                    <p class="govuk-body">{{standard.exceptions}}</p>
+
+           
+
+                    {% for product in standard.exceptions %}
+
+                        <div class="govuk-summary-card">
+                            <div class="govuk-summary-card__title-wrapper">
+                                <h2 class="govuk-summary-card__title">
+                                   Exemption
+                                </h2>
+                            </div>
+                            <div class="govuk-summary-card__content">
+                                <div class="govuk-summary-list">
+                                       <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
+                                        <dt class="govuk-summary-list__key">
+                                Product or service
+                            </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            {{ product.title}}
+                                        </dd>
+                                    </div>
+
+                                    <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
+                                        <dt class="govuk-summary-list__key">
+                                Details
+                            </dt>
+                                        <dd class="govuk-summary-list__value">
+                                            {% markdown %}
+                                            {{ product.details}}
+                                            {% endmarkdown %}
+                                        </dd>
+                                    </div>
+                                   
+                                   
+                                  
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                    
+
                 {% endif %}
 
                 {% if standard.validityPeriod%}
