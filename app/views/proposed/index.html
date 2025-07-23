@@ -26,30 +26,7 @@
         <div class="govuk-width-container">
             <div class="govuk-grid-row">
                 <div class="govuk-grid-column-three-quarters">
-                    <h2 class="govuk-heading-l">Standards awaiting review</h2>
-
-                    <p class="govuk-body">The following standards are awaiting review by the DfE standards forum. You can preview the draft version of these standards.</p>
-
-                    <table class="govuk-table">
-                        <thead class="govuk-table__head">
-                        <tr class="govuk-table__row">
-                            <th scope="col" class="govuk-table__header govuk-!-width-one-quarter">Standard</th>
-                            <th scope="col" class="govuk-table__header">Description</th>
-                        </tr>
-                        </thead>
-                        <tbody class="govuk-table__body">
-                            {% for standard in proposedStandards %}
-                       
-                            {% if standard.stage.title === 'Approval' %}
-                        <tr class="govuk-table__row">
-                            <th scope="row" class="govuk-table__header"><a href="/proposed/standard/{{standard.documentId}}" class="govuk-link">{{standard.title}}</a></th>
-                            <td class="govuk-table__cell">{{standard.summary}}</td>
-                        </tr>
-                        {% endif %}
-
-                        {% endfor %}
-                        </tbody>
-                    </table>
+                  
 
  <h2 class="govuk-heading-l">Proposed standards</h2>
 
@@ -60,7 +37,6 @@
                         <tr class="govuk-table__row">
                             <th scope="col" class="govuk-table__header govuk-!-width-one-quarter">Standard</th>
                             <th scope="col" class="govuk-table__header">Description</th>
-                            <th scope="col" class="govuk-table__header govuk-!-width-one-quarter">Owners</th>
                         </tr>
                         </thead>
                         <tbody class="govuk-table__body">
@@ -70,7 +46,6 @@
                         <tr class="govuk-table__row">
                             <th scope="row" class="govuk-table__header">{{standard.title}}</th>
                             <td class="govuk-table__cell">{{standard.summary}}</td>
-                            <td class="govuk-table__cell"><ul class="govuk-list">{% for owner in standard.owners %}<li>{{owner.firstName}} {{owner.lastName}}</li>{% endfor %}</ul></td>
                         </tr>
                         {% endif %}
 
