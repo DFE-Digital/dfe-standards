@@ -35,7 +35,6 @@
                         <tr class="govuk-table__row">
                             <th scope="col" class="govuk-table__header govuk-!-width-one-quarter">Standard</th>
                             <th scope="col" class="govuk-table__header">Description</th>
-                            <th scope="col" class="govuk-table__header govuk-!-width-one-quarter">Owners</th>
                         </tr>
                         </thead>
                         <tbody class="govuk-table__body">
@@ -45,7 +44,6 @@
                         <tr class="govuk-table__row">
                             <th scope="row" class="govuk-table__header"><a href="/proposed/standard/{{standard.documentId}}" class="govuk-link">{{standard.title}}</a></th>
                             <td class="govuk-table__cell">{{standard.summary}}</td>
-                            <td class="govuk-table__cell"><ul class="govuk-list">{% for owner in standard.owners %}<li>{{owner.firstName}} {{owner.lastName}}</li>{% endfor %}</ul></td>
                         </tr>
                         {% endif %}
 
