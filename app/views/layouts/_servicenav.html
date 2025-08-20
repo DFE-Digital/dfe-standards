@@ -1,0 +1,28 @@
+<section aria-label="Service information" class="govuk-service-navigation" data-module="govuk-service-navigation">
+    <div class="govuk-width-container">
+        <div class="govuk-service-navigation__container">
+            <span class="govuk-service-navigation__service-name">
+                <a href="/" class="govuk-service-navigation__link {% if serviceNav == 'Home' %}govuk-service-navigation__item--active{% endif %}">
+                        Find and use standards
+                    </a>
+            </span>
+            <nav aria-label="Menu" class="govuk-service-navigation__wrapper">
+                <button type="button" class="govuk-service-navigation__toggle govuk-js-service-navigation-toggle"
+                        aria-controls="navigation" hidden>
+                        Menu
+                    </button>
+                <ul class="govuk-service-navigation__list" id="navigation">
+                    <li class="govuk-service-navigation__item {% if selectedNav == 'Standards' %}govuk-service-navigation__item--active{% endif %}">
+                        <a class="govuk-service-navigation__link" href="/standards">Standards</a>
+                    </li>
+                    <li class="govuk-service-navigation__item {% if selectedNav == 'Proposed' %}govuk-service-navigation__item--active{% endif %}">
+                        <a class="govuk-service-navigation__link" href="/proposed">Proposed standards</a>
+                    </li>
+                    <li class="govuk-service-navigation__item {% if selectedNav == 'Support' %}govuk-service-navigation__item--active{% endif %}">
+                        <a class="govuk-service-navigation__link" href="/support">Support</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
