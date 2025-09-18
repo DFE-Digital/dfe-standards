@@ -87,7 +87,7 @@
                             <a href="#validityPeriod" class="govuk-link" data-target="owners">Declaring conformance</a>
                         </li>
                         <li class="govuk-link-list__item">
-                            <a href="#owners" class="govuk-link" data-target="owners">Owners and contacts</a>
+                            <a href="#owners" class="govuk-link" data-target="owners">Contacts</a>
                         </li>
                         {% if standard.relatedGuidance %}
                             <li class="govuk-link-list__item">
@@ -341,34 +341,9 @@
                     {% endif %}
                 {% endif %}
 
-                <h2 id="owners" class="govuk-heading-l">Owner and contacts</h2>
+                <h2 id="owners" class="govuk-heading-l">Contacts</h2>
 
-                <dl class="govuk-summary-list">
-                    {% for person in standard.owners %}
-                        <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
-                            <dt class="govuk-summary-list__key">
-                               Standard owner
-                            </dt>
-                            <dd class="govuk-summary-list__value">
-                                <a href="mailto:{{person.email}}">{{person.firstName}}
-                                    {{person.lastName}}</a><br/>
-                                    {{person.JobRole}}
-                            </dd>
-                        </div>
-                    {% endfor %}
-                    {% for person in standard.contacts %}
-                        <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
-                            <dt class="govuk-summary-list__key">
-                               Other point of contact
-                            </dt>
-                            <dd class="govuk-summary-list__value">
-                                <a href="mailto:{{person.email}}">{{person.firstName}}
-                                    {{person.lastName}}</a><br/>
-                                    {{person.JobRole}}
-                            </dd>
-                        </div>
-                    {% endfor %}
-                </dl>
+                <p class="govuk-body">If you have any queries about this standard, please contact the <a href="mailto:ddt.standards@education.gov.uk">DDT Standards</a> mailbox, in the first instance.</p>
 
                 {% if standard.relatedGuidance%}
 
